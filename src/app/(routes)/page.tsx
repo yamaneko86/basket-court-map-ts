@@ -1,15 +1,15 @@
-import Image from "next/image";
 import Header from "../_components/Header";
-import Link from "next/link";
+import MapApp from "../_components/MapApp";
+import Footer from "../_components/Footer";
 
 export default function Home() {
   return (
-    <>
-      <Header />
-      <h1>こんにちは</h1>
-      <Link href={"/about"}>
-        <h2>このアプリについて</h2>
-      </Link>
-    </>
+    <div className="bg-[url('../../../public/top.jpg')] ">
+      <div className="flex flex-col h-screen">
+        <Header />
+        <MapApp />
+        <Footer />
+      </div>
+    </div>
   );
 }
