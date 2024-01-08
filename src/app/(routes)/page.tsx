@@ -4,12 +4,16 @@ import Footer from "../_components/Footer";
 
 export default function Home() {
   return (
-    <div className="bg-[url('../../../public/top.jpg')] ">
-      <div className="flex flex-col h-screen">
-        <Header />
-        <MapApp />
-        <Footer />
-      </div>
-    </div>
+    <html>
+      <body>
+        <div className="bg-[url('../../../public/top.jpg')] ">
+          <main className="flex flex-col h-screen">
+            <Header />
+            <MapApp />
+            <Footer />
+          </main>
+        </div>
+      </body>
+    </html>
   );
 }
