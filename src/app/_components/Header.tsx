@@ -14,7 +14,7 @@ const Header = () => {
     <header className="flex items-center h-12 bg-amber-500">
       <h1 className="font-bold pl-4 pr-1">Basket Court Map</h1>
       <Image
-        src={"/BasketBall_icon.png"}
+        src={"/images/BasketBall_icon.png"}
         alt="BasketBall_icon"
         width={25}
         height={25}
@@ -39,7 +39,12 @@ const Header = () => {
             onClick={menuFunc}
             className="sm:hidden flex justify-center ml-auto pr-4 text-white"
           >
-            <Image src={"/Cancel.png"} alt="cancel" width={50} height={50} />
+            <Image
+              src={"/images/Cancel.png"}
+              alt="cancel"
+              width={50}
+              height={50}
+            />
           </button>
         </>
       ) : (
@@ -47,7 +52,12 @@ const Header = () => {
           onClick={menuFunc}
           className="sm:hidden flex justify-center ml-auto pr-4 text-white"
         >
-          <Image src={"/HamburgerMenu.png"} alt="menu" width={50} height={50} />
+          <Image
+            src={"/images/HamburgerMenu.png"}
+            alt="menu"
+            width={50}
+            height={50}
+          />
         </button>
       )}
       <ul className="sm:flex flex-row ml-auto hidden">
