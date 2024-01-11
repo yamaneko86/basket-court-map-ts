@@ -29,7 +29,7 @@ const distanceCalc = (
       )
     );
 
-  // 小数第2位まで表示
+  // 小数第2位まで表示(x.xxkm)
   const distance: number = Math.round(value * 100) / 100;
 
   return distance;
