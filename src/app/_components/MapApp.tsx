@@ -3,20 +3,33 @@ import React, { useEffect, useState } from "react";
 import { getCountOfCourts } from "@/_lib/supabaseFunc";
 
 const MapApp = () => {
-  const [count, setCount] = useState<any>();
+  const [countKinki, setCountKinki] = useState<any>(); //近畿地方のコート数
+  const [countKyusyu, setCountKyusyu] = useState<any>(); //九州地方のコート数
 
   useEffect(() => {
+    //近畿地方のコート数を取得
+    const getKinkiCourts = async () => {
+      const count = await getCountOfCourts(24, 30);
+      // console.log(count);
+      setCountKinki(count);
+    };
+
+    //九州地方のコート数を取得
     const getKyusyuCourts = async () => {
       const count = await getCountOfCourts(40, 47);
       // console.log(count);
-      setCount(count);
+      setCountKyusyu(count);
     };
+    getKinkiCourts();
     getKyusyuCourts();
   }, []);
 
   return (
     <div className="flex justify-center text-red-500">
-      九州地方のコート数：{count}
+      <ul>
+        <li>近畿地方のコート数：{countKinki}</li>
+        <li>九州地方のコート数：{countKyusyu}</li>
+      </ul>
     </div>
   );
 };
