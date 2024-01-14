@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 const Header = () => {
-  const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const menuFunc = () => {
     setOpenMenu(!openMenu);
