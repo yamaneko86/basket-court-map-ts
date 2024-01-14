@@ -17,21 +17,18 @@ const MapApp = () => {
     //北海道のコート数を取得
     const getHokkaidoCourts = async () => {
       const count = await getCountOfCourts(1, 1);
-      // console.log(count);
       setCountHokkaido(count);
     };
 
     //近畿地方のコート数を取得
     const getKinkiCourts = async () => {
       const count = await getCountOfCourts(24, 30);
-      // console.log(count);
       setCountKinki(count);
     };
 
     //九州地方のコート数を取得
     const getKyusyuCourts = async () => {
       const count = await getCountOfCourts(40, 47);
-      // console.log(count);
       setCountKyusyu(count);
     };
 
