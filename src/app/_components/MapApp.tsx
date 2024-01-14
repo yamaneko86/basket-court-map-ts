@@ -40,63 +40,63 @@ const MapApp = () => {
 
   return (
     <>
-      <ul className="grid sm:grid-flow-col grid-rows-3 justify-center mt-auto">
+      <div className="grid sm:grid-flow-col grid-rows-4 md:grid-rows-3 gap-2 justify-center mt-auto">
         <Link
           href={"/"}
-          className="m-3 w-40 h-10 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           北海道：{countHokkaido}
         </Link>
 
         <Link
           href={"/"}
-          className="m-3 w-40 h-10 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           東北地方：{countTohoku}
         </Link>
 
         <Link
           href={"/"}
-          className="m-3 w-40 h-10 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           関東地方：{countKanto}
         </Link>
 
         <Link
           href={"/"}
-          className="m-3 w-40 h-10 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           中部地方：{countChubu}
         </Link>
 
         <Link
           href={"/"}
-          className="m-3 w-40 h-10 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           近畿地方：{countKinki}
         </Link>
 
         <Link
           href={"/"}
-          className="m-3 w-40 h-10 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           中国地方：{countChugoku}
         </Link>
 
         <Link
           href={"/"}
-          className="m-3 w-40 h-10 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           四国地方：{countShikoku}
         </Link>
 
         <Link
           href={"/"}
-          className="m-3 w-40 h-10 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           九州地方：{countKyusyu}
         </Link>
-      </ul>
+      </div>
     </>
   );
 };
