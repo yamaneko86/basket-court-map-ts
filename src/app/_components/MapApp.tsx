@@ -4,14 +4,14 @@ import { getCountOfCourts } from "@/_lib/supabaseFunc";
 import Link from "next/link";
 
 const MapApp = () => {
-  const [countHokkaido, setCountHokkaido] = useState<any>(0); //北海道のコート数
-  const [countTohoku, setCountTohoku] = useState<any>(0); //東北地方のコート数
-  const [countKanto, setCountKanto] = useState<any>(0); //関東地方のコート数
-  const [countChubu, setCountChubu] = useState<any>(0); //中部地方のコート数
-  const [countKinki, setCountKinki] = useState<any>(0); //近畿地方のコート数
-  const [countChugoku, setCountChugoku] = useState<any>(0); //中国地方のコート数
-  const [countShikoku, setCountShikoku] = useState<any>(0); //四国地方のコート数
-  const [countKyusyu, setCountKyusyu] = useState<any>(0); //九州地方のコート数
+  const [countHokkaido, setCountHokkaido] = useState<any>(-1); //北海道のコート数
+  const [countTohoku, setCountTohoku] = useState<any>(-1); //東北地方のコート数
+  const [countKanto, setCountKanto] = useState<any>(-1); //関東地方のコート数
+  const [countChubu, setCountChubu] = useState<any>(-1); //中部地方のコート数
+  const [countKinki, setCountKinki] = useState<any>(-1); //近畿地方のコート数
+  const [countChugoku, setCountChugoku] = useState<any>(-1); //中国地方のコート数
+  const [countShikoku, setCountShikoku] = useState<any>(-1); //四国地方のコート数
+  const [countKyusyu, setCountKyusyu] = useState<any>(-1); //九州地方のコート数
 
   useEffect(() => {
     //北海道のコート数を取得
