@@ -21,7 +21,7 @@ const Header = () => {
       />
       {openMenu ? (
         <>
-          <ul className="sm:hidden flex flex-col animate-fade-in absolute inset-20 justify-evenly items-center bg-amber-500 border-2 rounded-lg text-2xl">
+          <ul className="sm:hidden flex flex-col animate-fade-in absolute inset-20 justify-evenly items-center bg-amber-500 border-2 rounded-lg text-3xl font-bold">
             <li className="hover:text-white">
               <Link href={"/"}>Home</Link>
             </li>
