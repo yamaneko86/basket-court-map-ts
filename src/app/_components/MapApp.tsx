@@ -32,6 +32,7 @@ const MapApp = () => {
       setCountKyusyu(count);
     };
 
+    // 処理呼び出し
     getHokkaidoCourts();
     getKinkiCourts();
     getKyusyuCourts();
