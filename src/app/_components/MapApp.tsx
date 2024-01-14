@@ -36,16 +36,7 @@ const MapApp = () => {
     getHokkaidoCourts();
     getKinkiCourts();
     getKyusyuCourts();
-  }, [
-    countHokkaido,
-    countTohoku,
-    countKanto,
-    countChubu,
-    countKinki,
-    countChugoku,
-    countShikoku,
-    countKyusyu,
-  ]);
+  }, []);
 
   return (
     <>
