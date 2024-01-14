@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <header className="flex items-center h-12 bg-amber-500">
-      <h1 className="font-bold pl-4 pr-1">Basket Court Map</h1>
+      <h1 className="text-lg font-bold pl-4 pr-1">Basket Court Map</h1>
       <Image
         src={"/images/BasketBall_icon.png"}
         alt="BasketBall_icon"
@@ -61,16 +61,16 @@ const Header = () => {
         </button>
       )}
       <ul className="sm:flex flex-row ml-auto hidden">
-        <li className="pr-4 hover:text-white">
+        <li className="pr-4 hover:text-white text-lg">
           <Link href={"/"}>Home</Link>
         </li>
-        <li className="pr-4 hover:text-white">
+        <li className="pr-4 hover:text-white text-lg">
           <Link href={"/about"}>About</Link>
         </li>
-        <li className="pr-4 hover:text-white">
+        <li className="pr-4 hover:text-white text-lg">
           <Link href={"/contact"}>Contact</Link>
         </li>
-        <li className="pr-4 hover:text-white">
+        <li className="pr-4 hover:text-white text-lg">
           <Link href={"/"}>THINKING...</Link>
         </li>
       </ul>
