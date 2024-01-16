@@ -20,10 +20,40 @@ const MapApp = () => {
       setCountHokkaido(count);
     };
 
+    //東北地方のコート数を取得
+    const getTohokuCourts = async () => {
+      const count = await getCountOfCourts(2, 7);
+      setCountTohoku(count);
+    };
+
+    //関東地方のコート数を取得
+    const getKantoCourts = async () => {
+      const count = await getCountOfCourts(8, 14);
+      setCountKanto(count);
+    };
+
+    //中部地方のコート数を取得
+    const getChubuCourts = async () => {
+      const count = await getCountOfCourts(15, 23);
+      setCountChubu(count);
+    };
+
     //近畿地方のコート数を取得
     const getKinkiCourts = async () => {
       const count = await getCountOfCourts(24, 30);
       setCountKinki(count);
+    };
+
+    //中国地方のコート数を取得
+    const getChugokuCourts = async () => {
+      const count = await getCountOfCourts(31, 35);
+      setCountChugoku(count);
+    };
+
+    //四国地方のコート数を取得
+    const getShikokuCourts = async () => {
+      const count = await getCountOfCourts(36, 39);
+      setCountShikoku(count);
     };
 
     //九州地方のコート数を取得
@@ -34,7 +64,12 @@ const MapApp = () => {
 
     // 処理呼び出し
     getHokkaidoCourts();
+    getTohokuCourts();
+    getKantoCourts();
+    getChubuCourts();
     getKinkiCourts();
+    getChugokuCourts();
+    getShikokuCourts();
     getKyusyuCourts();
   }, []);
 
