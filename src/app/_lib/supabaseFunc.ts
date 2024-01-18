@@ -9,8 +9,8 @@ export const getCountOfCourts = async (
     const { count, error } = await supabase
       .from("BasketCourtMaps")
       .select("*", { count: "exact", head: true })
-      .gte("prefecture_code", lower_limit)
-      .lte("prefecture_code", upper_limit);
+      .gte("prefecture_code", lower_limit) //greater than or equal
+      .lte("prefecture_code", upper_limit); //less than or equal
 
     if (error) {
       throw error;
