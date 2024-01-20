@@ -18,6 +18,8 @@ export const getCountOfCourts = async (
 
     // コートの数を返す
     return count;
+
+    // 以下、エラー時の処理
   } catch (error) {
     console.error("Error fetching count");
     return -1;
@@ -25,7 +27,7 @@ export const getCountOfCourts = async (
 };
 
 // 登録済みのバスケットコートのIDで緯度経度を取得
-export const getCourtLatLon = async (map_id: string) => {
+export const getCourtLatLng = async (map_id: string) => {
   try {
     const { data, error } = await supabase
       .from("BasketCourtMaps")
@@ -38,6 +40,8 @@ export const getCourtLatLon = async (map_id: string) => {
 
     // コートの緯度・経度を返す
     return data;
+
+    // 以下、エラー時の処理
   } catch (error) {
     console.error("Error fetching data!");
   }
