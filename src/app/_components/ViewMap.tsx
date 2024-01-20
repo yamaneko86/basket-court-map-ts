@@ -1,10 +1,5 @@
 "use client";
-import {
-  GoogleMap,
-  LoadScript,
-  LoadScriptNext,
-  MarkerF,
-} from "@react-google-maps/api";
+import { GoogleMap, LoadScriptNext, MarkerF } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import { getCourtLatLng } from "@/_lib/supabaseFunc";
 import { distanceCalc } from "@/_lib/distanceCalc";
