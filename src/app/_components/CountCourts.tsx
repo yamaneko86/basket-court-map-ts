@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getCountOfCourts } from "@/_lib/supabaseFunc";
 import Link from "next/link";
 
-const MapApp = () => {
+const CountCourts = () => {
   const [countHokkaido, setCountHokkaido] = useState<any>(-1); //北海道のコート数
   const [countTohoku, setCountTohoku] = useState<any>(-1); //東北地方のコート数
   const [countKanto, setCountKanto] = useState<any>(-1); //関東地方のコート数
@@ -126,7 +126,7 @@ const MapApp = () => {
         </Link>
 
         <Link
-          href={"/"}
+          href={"/kyushu"}
           className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           九州地方：{countKyusyu}
@@ -136,4 +136,4 @@ const MapApp = () => {
   );
 };
 
-export default MapApp;
+export default CountCourts;
