@@ -1,9 +1,9 @@
 // 緯度・経度を用いた距離の計算
 export const distanceCalc = (
   curLat: number, //現在地の緯度
-  curLon: number, //現在地の経度
+  curLng: number, //現在地の経度
   desLat: number, //目的地(バスケットコート)の緯度
-  desLon: number //目的地(バスケットコート)の経度
+  desLng: number //目的地(バスケットコート)の経度
 ): number => {
   // const R = 3958.8; //マイルの場合
   const R = 6371.071; //キロメートルの場合
@@ -12,9 +12,9 @@ export const distanceCalc = (
   const rDesLat: number = desLat * (Math.PI / 180);
   const diffLat: number = rDesLat - rCurLat; // 緯度の差
 
-  const rCurLon: number = curLon * (Math.PI / 180);
-  const rDesLon: number = desLon * (Math.PI / 180);
-  const diffLon: number = rCurLon - rDesLon; // 経度の差
+  const rCurLng: number = curLng * (Math.PI / 180);
+  const rDesLng: number = desLng * (Math.PI / 180);
+  const diffLng: number = rCurLng - rDesLng; // 経度の差
 
   const value: number =
     2 *
@@ -24,8 +24,8 @@ export const distanceCalc = (
         Math.sin(diffLat / 2) * Math.sin(diffLat / 2) +
           Math.cos(rCurLat) *
             Math.cos(rDesLat) *
-            Math.sin(diffLon / 2) *
-            Math.sin(diffLon / 2)
+            Math.sin(diffLng / 2) *
+            Math.sin(diffLng / 2)
       )
     );
 
