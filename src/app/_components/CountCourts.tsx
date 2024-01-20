@@ -11,7 +11,7 @@ const CountCourts = () => {
   const [countKinki, setCountKinki] = useState<any>(-1); //近畿地方のコート数
   const [countChugoku, setCountChugoku] = useState<any>(-1); //中国地方のコート数
   const [countShikoku, setCountShikoku] = useState<any>(-1); //四国地方のコート数
-  const [countKyusyu, setCountKyusyu] = useState<any>(-1); //九州地方のコート数
+  const [countKyushu, setCountKyushu] = useState<any>(-1); //九州地方のコート数
 
   useEffect(() => {
     //北海道のコート数を取得
@@ -57,9 +57,9 @@ const CountCourts = () => {
     };
 
     //九州地方のコート数を取得
-    const getKyusyuCourts = async () => {
+    const getKyushuCourts = async () => {
       const count = await getCountOfCourts(40, 47);
-      setCountKyusyu(count);
+      setCountKyushu(count);
     };
 
     // 処理呼び出し
@@ -70,7 +70,7 @@ const CountCourts = () => {
     getKinkiCourts();
     getChugokuCourts();
     getShikokuCourts();
-    getKyusyuCourts();
+    getKyushuCourts();
   }, []);
 
   return (
@@ -129,7 +129,7 @@ const CountCourts = () => {
           href={"/kyushu"}
           className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
-          九州地方：{countKyusyu}
+          九州地方：{countKyushu}
         </Link>
       </div>
     </>
