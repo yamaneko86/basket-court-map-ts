@@ -1,13 +1,13 @@
 import Footer from "@/_components/Footer";
 import Header from "@/_components/Header";
-import MapApp from "@/_components/MapApp";
+import CountCourts from "@/_components/CountCourts";
 
 export default function Home() {
   return (
     <div className="bg-[url('../../../public/images/top.jpg')] ">
       <main className="flex flex-col h-screen">
         <Header />
-        <MapApp />
+        <CountCourts />
         <Footer />
       </main>
     </div>
