@@ -1,5 +1,10 @@
 "use client";
-import { GoogleMap, LoadScript, MarkerF } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScript,
+  LoadScriptNext,
+  MarkerF,
+} from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import { getCourtLatLng } from "@/_lib/supabaseFunc";
 import { distanceCalc } from "@/_lib/distanceCalc";
@@ -65,7 +70,7 @@ const ViewMap = () => {
 
   return (
     <div>
-      <LoadScript
+      <LoadScriptNext
         googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
       >
         <GoogleMap
@@ -76,7 +81,7 @@ const ViewMap = () => {
           <MarkerF visible={true} position={userPos} />
           <MarkerF visible={true} position={courtPos} />
         </GoogleMap>
-      </LoadScript>
+      </LoadScriptNext>
       <div>2点間の距離:{distance}km</div>
     </div>
   );
