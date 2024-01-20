@@ -25,7 +25,7 @@ export const getCountOfCourts = async (
 };
 
 // 登録済みのバスケットコートのIDで緯度経度を取得
-export const getLatLon = async (map_id: string) => {
+export const getCourtLatLon = async (map_id: string) => {
   try {
     const { data, error } = await supabase
       .from("BasketCourtMaps")
