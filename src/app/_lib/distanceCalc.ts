@@ -1,5 +1,5 @@
 // 緯度・経度を用いた距離の計算
-const distanceCalc = (
+export const distanceCalc = (
   curLat: number, //現在地の緯度
   curLon: number, //現在地の経度
   desLat: number, //目的地(バスケットコート)の緯度
