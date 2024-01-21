@@ -13,7 +13,7 @@ const zoomScale = 15;
 
 let distance: number;
 
-const ViewMap = () => {
+const ViewMap = (props: MapId) => {
   // 現在地の緯度経度を管理
   const [userPos, setUserPos] = useState<{ lat: number; lng: number }>({
     lat: 0,
@@ -45,7 +45,7 @@ const ViewMap = () => {
 
     // コートの緯度経度を取得
     const getPlaceLatLng = async () => {
-      const data = await getCourtLatLng("370c1246-753a-4178-bc56-c44e923d8a00");
+      const data = await getCourtLatLng(props.map_id);
       if (data) {
         setCourtPos({ lat: data[0].latitude, lng: data[0].longitude });
       }
@@ -61,7 +61,7 @@ const ViewMap = () => {
       courtPos.lat,
       courtPos.lng
     );
-  }, [courtPos.lat, courtPos.lng, userPos.lat, userPos.lng]);
+  }, [props.map_id, courtPos.lat, courtPos.lng, userPos.lat, userPos.lng]);
 
   return (
     <div>
