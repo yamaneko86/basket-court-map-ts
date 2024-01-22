@@ -1,5 +1,10 @@
 "use client";
-import { GoogleMap, LoadScriptNext, MarkerF } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScriptNext,
+  MarkerF,
+  PolylineF,
+} from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import { getCourtLatLng } from "@/_lib/supabaseFunc";
 import { distanceCalc } from "@/_lib/distanceCalc";
@@ -25,6 +30,12 @@ const ViewMap = (props: MapId) => {
     lat: 0,
     lng: 0,
   });
+
+  // ２地点間の線を引くためのPath
+  const polylinePath = [
+    { lat: userPos.lat, lng: userPos.lng },
+    { lat: courtPos.lat, lng: courtPos.lng },
+  ];
 
   useEffect(() => {
     // ユーザの現在の緯度経度を取得
@@ -75,6 +86,7 @@ const ViewMap = (props: MapId) => {
         >
           <MarkerF visible={true} position={userPos} />
           <MarkerF visible={true} position={courtPos} />
+          <PolylineF path={polylinePath} />
         </GoogleMap>
       </LoadScriptNext>
       <div>2点間の距離:{distance}km</div>
