@@ -1,7 +1,7 @@
 import { supabase } from "./supabase";
 
 // 都道府県をグループ化して各情報を取得
-export const getCourtInfo = async (
+export const getCourtInfoByPref = async (
   lower_limit: number,
   upper_limit: number
 ) => {
@@ -21,7 +21,7 @@ export const getCourtInfo = async (
 
     // 以下、エラー時の処理
   } catch (error) {
-    console.error("Error fetching count");
+    console.error("Error fetching data!");
     return null;
   }
 };
@@ -47,17 +47,17 @@ export const getCountOfCourts = async (
 
     // 以下、エラー時の処理
   } catch (error) {
-    console.error("Error fetching count");
+    console.error("Error fetching count!");
     return -1;
   }
 };
 
-// 登録済みのバスケットコートのIDで緯度経度を取得
-export const getCourtLatLng = async (map_id: string) => {
+// 登録済みのバスケットコートのIDで各情報を取得
+export const getCourtInfo = async (map_id: string) => {
   try {
     const { data, error } = await supabase
       .from("BasketCourtMaps")
-      .select("latitude, longitude")
+      .select("*")
       .eq("map_id", map_id);
 
     if (error) {
