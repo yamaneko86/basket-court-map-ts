@@ -23,6 +23,7 @@ const CourtsList = (props: PrefectureCodes) => {
         <tr>
           <th>コート名</th>
           <th>住所</th>
+          <th>使用状況</th>
           <th>詳細</th>
         </tr>
       </thead>
@@ -31,6 +32,7 @@ const CourtsList = (props: PrefectureCodes) => {
           <tr key={court.map_id}>
             <td>{court.map_name}</td>
             <td>{court.map_address}</td>
+            <td>{court.isUsing ? "使用中" : "未使用"}</td>
             <td>
               <Link href={`detail/${court.map_id}`}>詳細</Link>
             </td>
