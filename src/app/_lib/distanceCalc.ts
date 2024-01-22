@@ -34,5 +34,3 @@ export const distanceCalc = (
 
   return distance;
 };
-
-// console.log(distanceCalc(40.7767644, -73.9761399, 40.771209, -73.9673991));
