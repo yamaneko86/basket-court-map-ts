@@ -6,7 +6,7 @@ import {
   PolylineF,
 } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
-import { getCourtInfo } from "@/_lib/supabaseFunc";
+import { getCourtInfo, switchIsUsing } from "@/_lib/supabaseFunc";
 import { distanceCalc } from "@/_lib/distanceCalc";
 
 const containerStyle = {
@@ -22,7 +22,7 @@ const ViewMap = (props: MapId) => {
   // バスケットコートの名前・住所・使用状況を管理
   const [mapName, setMapName] = useState<string>("");
   const [mapAddress, setMapAddress] = useState<string>("");
-  const [isUsing, setIsUsing] = useState<boolean>();
+  const [isUsing, setIsUsing] = useState<boolean>(false);
 
   // 現在地の緯度経度を管理
   const [userPos, setUserPos] = useState<{ lat: number; lng: number }>({
@@ -41,6 +41,11 @@ const ViewMap = (props: MapId) => {
     { lat: userPos.lat, lng: userPos.lng },
     { lat: courtPos.lat, lng: courtPos.lng },
   ];
+
+  const handleSwitch = async () => {
+    await switchIsUsing(props.map_id, isUsing);
+    setIsUsing(!isUsing);
+  };
 
   useEffect(() => {
     // ユーザの現在の緯度経度を取得
@@ -79,7 +84,14 @@ const ViewMap = (props: MapId) => {
       courtPos.lat,
       courtPos.lng
     );
-  }, [props.map_id, courtPos.lat, courtPos.lng, userPos.lat, userPos.lng]);
+  }, [
+    props.map_id,
+    isUsing,
+    courtPos.lat,
+    courtPos.lng,
+    userPos.lat,
+    userPos.lng,
+  ]);
 
   return (
     <div className="flex flex-col h-screen">
@@ -88,7 +100,7 @@ const ViewMap = (props: MapId) => {
         <br />
         {mapAddress}
         <br />
-        {isUsing ? "使用中" : "未使用"}
+        <button onClick={handleSwitch}>{isUsing ? "使用中" : "未使用"}</button>
         <br />
       </div>
       <LoadScriptNext

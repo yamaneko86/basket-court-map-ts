@@ -72,3 +72,21 @@ export const getCourtInfo = async (map_id: string) => {
     console.error("Error fetching data!");
   }
 };
+
+// コートの使用状況を切り替える処理
+export const switchIsUsing = async (map_id: string, isUsing: boolean) => {
+  try {
+    const { error } = await supabase
+      .from("BasketCourtMaps")
+      .update({ isUsing: !isUsing })
+      .eq("map_id", map_id);
+
+    if (error) {
+      throw error;
+    }
+
+    // 以下、エラー時の処理
+  } catch (error) {
+    console.error("Error switching isUsing!");
+  }
+};
