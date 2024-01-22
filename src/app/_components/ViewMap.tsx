@@ -60,7 +60,6 @@ const ViewMap = (props: MapId) => {
       if (data) {
         setCourtPos({ lat: data[0].latitude, lng: data[0].longitude });
       }
-      // setCourtPos({ lat: 33.589728, lng: 130.420727 });
     };
 
     // 処理呼び出し
