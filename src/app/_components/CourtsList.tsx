@@ -1,5 +1,5 @@
 "use client";
-import { getCourtInfo } from "@/_lib/supabaseFunc";
+import { getCourtInfoByPref } from "@/_lib/supabaseFunc";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -9,7 +9,7 @@ const CourtsList = (props: PrefectureCodes) => {
 
   useEffect(() => {
     const getCourts = async () => {
-      const courtsInfo = await getCourtInfo(lower_limit, upper_limit);
+      const courtsInfo = await getCourtInfoByPref(lower_limit, upper_limit);
       setCourts(courtsInfo);
     };
 

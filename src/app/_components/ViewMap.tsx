@@ -6,7 +6,7 @@ import {
   PolylineF,
 } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
-import { getCourtLatLng } from "@/_lib/supabaseFunc";
+import { getCourtInfo } from "@/_lib/supabaseFunc";
 import { distanceCalc } from "@/_lib/distanceCalc";
 
 const containerStyle = {
@@ -19,13 +19,18 @@ const zoomScale = 15;
 let distance: number;
 
 const ViewMap = (props: MapId) => {
+  // バスケットコートの名前・住所・使用状況を管理
+  const [mapName, setMapName] = useState<string>("");
+  const [mapAddress, setMapAddress] = useState<string>("");
+  const [isUsing, setIsUsing] = useState<boolean>();
+
   // 現在地の緯度経度を管理
   const [userPos, setUserPos] = useState<{ lat: number; lng: number }>({
     lat: 0,
     lng: 0,
   });
 
-  // 目的地の緯度経度を管理
+  // バスケットコートの緯度経度を管理
   const [courtPos, setCourtPos] = useState<{ lat: number; lng: number }>({
     lat: 0,
     lng: 0,
@@ -54,17 +59,20 @@ const ViewMap = (props: MapId) => {
       );
     };
 
-    // コートの緯度経度を取得
-    const getPlaceLatLng = async () => {
-      const data = await getCourtLatLng(props.map_id);
+    // コートの名前・住所・緯度経度・使用状況を取得
+    const getCourtInfoDetail = async () => {
+      const data = await getCourtInfo(props.map_id);
       if (data) {
+        setMapName(data[0].map_name);
+        setMapAddress(data[0].map_address);
         setCourtPos({ lat: data[0].latitude, lng: data[0].longitude });
+        setIsUsing(data[0].isUsing);
       }
     };
 
     // 処理呼び出し
     getUserLatLng();
-    getPlaceLatLng();
+    getCourtInfoDetail();
     distance = distanceCalc(
       userPos.lat,
       userPos.lng,
@@ -74,7 +82,15 @@ const ViewMap = (props: MapId) => {
   }, [props.map_id, courtPos.lat, courtPos.lng, userPos.lat, userPos.lng]);
 
   return (
-    <div>
+    <div className="flex flex-col h-screen">
+      <div>
+        {mapName}
+        <br />
+        {mapAddress}
+        <br />
+        {isUsing ? "使用中" : "未使用"}
+        <br />
+      </div>
       <LoadScriptNext
         googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
       >
