@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { getCourtInfo, switchIsUsing } from "@/_lib/supabaseFunc";
 import { distanceCalc } from "@/_lib/distanceCalc";
+import { useRouter } from "next/navigation";
 
 const containerStyle = {
   width: "80%",
@@ -19,7 +20,8 @@ const zoomScale = 15;
 let distance: number;
 
 const ViewMap = (props: MapId) => {
-  // バスケットコートの名前・住所・使用状況を管理
+  // バスケットコートの都道府県コード・名前・住所・使用状況を管理
+  const [prefCode, setPrefCode] = useState<number>();
   const [mapName, setMapName] = useState<string>("");
   const [mapAddress, setMapAddress] = useState<string>("");
   const [isUsing, setIsUsing] = useState<boolean>(false);
@@ -47,6 +49,32 @@ const ViewMap = (props: MapId) => {
     setIsUsing(!isUsing);
   };
 
+  // 都道府県コードによって戻る一覧画面を切り替える
+  const router = useRouter();
+  const switchHref = () => {
+    if (prefCode) {
+      if (prefCode == 1) {
+        router.push("/hokkaido");
+      } else if (prefCode >= 2 && prefCode <= 7) {
+        router.push("/tohoku");
+      } else if (prefCode >= 8 && prefCode <= 14) {
+        router.push("/kanto");
+      } else if (prefCode >= 15 && prefCode <= 23) {
+        router.push("/chubu");
+      } else if (prefCode >= 24 && prefCode <= 30) {
+        router.push("/kinki");
+      } else if (prefCode >= 31 && prefCode <= 35) {
+        router.push("/chugoku");
+      } else if (prefCode >= 36 && prefCode <= 39) {
+        router.push("/shikoku");
+      } else if (prefCode >= 40 && prefCode <= 47) {
+        router.push("/kyushu");
+      } else {
+        router.push("/");
+      }
+    }
+  };
+
   useEffect(() => {
     // ユーザの現在の緯度経度を取得
     const getUserLatLng = () => {
@@ -64,10 +92,11 @@ const ViewMap = (props: MapId) => {
       );
     };
 
-    // コートの名前・住所・緯度経度・使用状況を取得
+    // コートの都道府県コード・名前・住所・緯度経度・使用状況を取得
     const getCourtInfoDetail = async () => {
       const data = await getCourtInfo(props.map_id);
       if (data) {
+        setPrefCode(data[0].prefecture_code);
         setMapName(data[0].map_name);
         setMapAddress(data[0].map_address);
         setCourtPos({ lat: data[0].latitude, lng: data[0].longitude });
@@ -117,6 +146,9 @@ const ViewMap = (props: MapId) => {
         </GoogleMap>
       </LoadScriptNext>
       <div>2点間の距離:{distance}km</div>
+      <button type="button" onClick={switchHref}>
+        一覧に戻る
+      </button>
     </div>
   );
 };
