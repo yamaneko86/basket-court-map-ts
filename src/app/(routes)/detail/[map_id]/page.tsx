@@ -5,7 +5,7 @@ import ViewMap from "@/_components/ViewMap";
 import { useParams } from "next/navigation";
 
 export default function Detail() {
-  // map_idをURLから取得
+  // map_idをURLから取得("map_id"は動的ルートパス名)
   const path = useParams().map_id.toString();
 
   return (
