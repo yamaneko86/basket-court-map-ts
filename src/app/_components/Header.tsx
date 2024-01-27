@@ -14,7 +14,8 @@ const Header = () => {
     <header className="flex items-center h-12 bg-amber-500">
       <h1 className="text-lg font-bold pl-4 pr-1">Basket Court Map</h1>
       <Image
-        src={"/images/BasketBall_icon.png"}
+        // src={"/images/BasketBall_icon.png"}
+        src={"/images/BasketGoal.svg"}
         alt="BasketBall_icon"
         width={25}
         height={25}
@@ -42,8 +43,8 @@ const Header = () => {
             <Image
               src={"/images/Cancel.png"}
               alt="cancel"
-              width={50}
-              height={50}
+              width={40}
+              height={40}
             />
           </button>
         </>
@@ -55,8 +56,8 @@ const Header = () => {
           <Image
             src={"/images/HamburgerMenu.png"}
             alt="menu"
-            width={50}
-            height={50}
+            width={40}
+            height={40}
           />
         </button>
       )}
