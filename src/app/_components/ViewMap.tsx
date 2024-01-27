@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 
 const containerStyle = {
   width: "80%",
-  height: "75vh",
+  height: "70vh",
 };
 
 const zoomScale = 15;
@@ -123,7 +123,7 @@ const ViewMap = (props: MapId) => {
   ]);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="">
       <div>
         {mapName}
         <br />
