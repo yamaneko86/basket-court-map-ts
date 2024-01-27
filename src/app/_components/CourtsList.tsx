@@ -18,6 +18,7 @@ const CourtsList = (props: PrefectureCodes) => {
   }, [lower_limit, upper_limit]);
 
   return (
+    // TODO テーブルのレイアウトを整える
     <table className="table-fixed">
       <thead>
         <tr>
