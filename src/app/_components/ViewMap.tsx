@@ -129,7 +129,9 @@ const ViewMap = (props: MapId) => {
         <br />
         {mapAddress}
         <br />
-        <button onClick={handleSwitch}>{isUsing ? "使用中" : "未使用"}</button>
+        <button onClick={() => handleSwitch()}>
+          {isUsing ? "使用中" : "未使用"}
+        </button>
         <br />
       </div>
       <LoadScriptNext
@@ -146,7 +148,7 @@ const ViewMap = (props: MapId) => {
         </GoogleMap>
       </LoadScriptNext>
       <div>2点間の距離:{distance}km</div>
-      <button type="button" onClick={switchHref}>
+      <button type="button" onClick={() => switchHref()}>
         一覧に戻る
       </button>
     </div>

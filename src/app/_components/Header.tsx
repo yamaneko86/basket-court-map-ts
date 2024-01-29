@@ -37,7 +37,7 @@ const Header = () => {
             </li>
           </ul>
           <button
-            onClick={menuFunc}
+            onClick={() => menuFunc()}
             className="sm:hidden flex justify-center ml-auto pr-4 text-white"
           >
             <Image
@@ -50,7 +50,7 @@ const Header = () => {
         </>
       ) : (
         <button
-          onClick={menuFunc}
+          onClick={() => menuFunc()}
           className="sm:hidden flex justify-center ml-auto pr-4 text-white"
         >
           <Image
