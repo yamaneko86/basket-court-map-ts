@@ -12,7 +12,9 @@ const Header = () => {
 
   return (
     <header className="flex items-center h-12 bg-amber-500">
-      <h1 className="text-lg font-bold pl-4 pr-1">Basket Court Map</h1>
+      <Link href={"/"} className="text-lg font-bold pl-4 pr-1">
+        Basket Court Map
+      </Link>
       <Image
         // src={"/images/BasketBall_icon.png"}
         src={"/images/BasketGoal.svg"}
