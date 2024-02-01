@@ -5,7 +5,7 @@ import {
   MarkerF,
   PolylineF,
 } from "@react-google-maps/api";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { getCourtInfo, switchIsUsing } from "@/_lib/supabaseFunc";
 import { distanceCalc } from "@/_lib/distanceCalc";
 import { useRouter } from "next/navigation";
@@ -134,19 +134,21 @@ const ViewMap = (props: MapId) => {
         </button>
         <br />
       </div>
-      <LoadScriptNext
-        googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
-      >
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={userPos}
-          zoom={zoomScale}
+      <Suspense fallback={<p>Loading...</p>}>
+        <LoadScriptNext
+          googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
         >
-          <MarkerF visible={true} position={userPos} />
-          <MarkerF visible={true} position={courtPos} />
-          <PolylineF path={polylinePath} />
-        </GoogleMap>
-      </LoadScriptNext>
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={userPos}
+            zoom={zoomScale}
+          >
+            <MarkerF visible={true} position={userPos} />
+            <MarkerF visible={true} position={courtPos} />
+            <PolylineF path={polylinePath} />
+          </GoogleMap>
+        </LoadScriptNext>
+      </Suspense>
       <div>2点間の距離:{distance}km</div>
       <button type="button" onClick={() => switchHref()}>
         一覧に戻る
