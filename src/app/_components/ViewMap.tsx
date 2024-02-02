@@ -6,7 +6,7 @@ import {
   PolylineF,
 } from "@react-google-maps/api";
 import { Suspense, useEffect, useState } from "react";
-import { getCourtInfo, switchIsUsing } from "@/_lib/supabaseFunc";
+import { getCourtInfo, switchIsUsing } from "@/_lib/supabase/supabaseFunc";
 import { distanceCalc } from "@/_lib/distanceCalc";
 import { useRouter } from "next/navigation";
 
