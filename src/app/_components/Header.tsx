@@ -1,10 +1,13 @@
 "use client";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const router = useRouter();
 
   const menuFunc = () => {
     setOpenMenu(!openMenu);
@@ -74,7 +77,7 @@ const Header = () => {
           <Link href={"/contact"}>Contact</Link>
         </li>
         <li className="pr-4 hover:text-white text-lg">
-          <Link href={"/"}>THINKING...</Link>
+          <div>LogOut</div>
         </li>
       </ul>
     </header>
