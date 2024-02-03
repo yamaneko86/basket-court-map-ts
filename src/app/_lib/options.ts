@@ -8,28 +8,42 @@ export const options: NextAuthOptions = {
     Credentials({
       name: "Sign in",
       credentials: {
-        email: {
-          label: "Email",
-          type: "email",
-          placeholder: "example@example.com",
-        },
+        user_id: { label: "User ID", type: "text" },
         password: { label: "Password", type: "password" },
       },
 
+      // ユーザID認証
       async authorize(credentials) {
         // TODO supabase関数でUsersから取得
         const users = [
-          { id: "1", email: "user1@example.com", password: "password1" },
-          { id: "2", email: "user2@example.com", password: "password2" },
-          { id: "3", email: "abc@abc", password: "123" },
+          {
+            user_id: "taro001",
+            user_name: "Taro",
+            email: "user1@example.com",
+            password: "password1",
+          },
+          {
+            user_id: "jiro002",
+            user_name: "Jiro",
+            email: "user2@example.com",
+            password: "password2",
+          },
+          {
+            user_id: "saburo003",
+            user_name: "Saburo",
+            email: "user3@example.com",
+            password: "password3",
+          },
         ];
 
-        const user = users.find((user) => user.email === credentials?.email);
+        const user = users.find(
+          (user) => user.user_id === credentials?.user_id
+        );
 
         if (user && user?.password === credentials?.password) {
           return {
-            id: user.id,
-            name: user.email,
+            id: user.user_id,
+            name: user.user_name,
             email: user.email,
             role: "admin",
           };
@@ -41,7 +55,7 @@ export const options: NextAuthOptions = {
   ],
 
   callbacks: {
-    jwt: async ({ token, user, account, profile, isNewUser }) => {
+    jwt: async ({ token, user, account }) => {
       if (user) {
         token.user = user;
         const u = user as any;
@@ -54,6 +68,7 @@ export const options: NextAuthOptions = {
     },
     session: ({ session, token }) => {
       console.log("in session", { session, token });
+      token.accessToken;
       return {
         ...session,
         user: {
