@@ -4,7 +4,7 @@ import CountCourts from "@/_components/CountCourts";
 
 export default async function Home() {
   return (
-    <div className="bg-[url('../../../public/images/top.jpg')] ">
+    <div className="bg-[url('../../public/images/top.jpg')]">
       <main className="flex flex-col h-screen">
         <Header />
         <CountCourts />
