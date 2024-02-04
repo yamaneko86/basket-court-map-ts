@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { getCountOfCourts } from "@/_lib/supabase/supabaseFunc";
+import { getCountOfCourts } from "@/_utils/supabase/supabaseFunc";
 import Link from "next/link";
 
 const CountCourts = () => {

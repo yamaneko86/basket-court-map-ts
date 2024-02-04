@@ -1,5 +1,5 @@
 "use client";
-import { getCourtInfoByPref } from "@/_lib/supabase/supabaseFunc";
+import { getCourtInfoByPref } from "@/_utils/supabase/supabaseFunc";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
