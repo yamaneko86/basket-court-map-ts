@@ -1,7 +1,7 @@
 "use client";
 import Footer from "@/_components/Footer";
-import Header from "@/_components/Header";
 import ViewMap from "@/_components/ViewMap";
+import SupabaseListener from "@/_components/supabaseListener";
 import { useParams } from "next/navigation";
 
 export default function Detail() {
@@ -11,7 +11,7 @@ export default function Detail() {
   return (
     <div>
       <main className="flex flex-col h-screen">
-        <Header />
+        <SupabaseListener />
         <ViewMap map_id={path} />
         <Footer />
       </main>

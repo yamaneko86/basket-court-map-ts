@@ -1,10 +1,10 @@
 import Footer from "@/_components/Footer";
-import Header from "@/_components/Header";
+import SupabaseListener from "@/_components/supabaseListener";
 
 export default function Contact() {
   return (
     <main className="flex flex-col h-screen">
-      <Header />
+      <SupabaseListener />
       <h1>これはcontactページです</h1>
       <Footer />
     </main>
