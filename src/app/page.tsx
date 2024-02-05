@@ -1,12 +1,12 @@
 import Footer from "@/_components/Footer";
-import Header from "@/_components/Header";
 import CountCourts from "@/_components/CountCourts";
+import SupabaseListener from "./_components/supabaseListener";
 
-export default async function Home() {
+export default function Home() {
   return (
     <div className="bg-[url('../../public/images/top.jpg')]">
       <main className="flex flex-col h-screen">
-        <Header />
+        <SupabaseListener />
         <CountCourts />
         <Footer />
       </main>
