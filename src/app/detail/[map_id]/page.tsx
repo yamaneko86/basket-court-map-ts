@@ -1,4 +1,3 @@
-"use client";
 import Footer from "@/_components/Footer";
 import ViewMap from "@/_components/ViewMap";
 import SupabaseListener from "@/_components/supabaseListener";
