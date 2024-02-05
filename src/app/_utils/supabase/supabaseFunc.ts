@@ -90,3 +90,26 @@ export const switchIsUsing = async (map_id: string, isUsing: boolean) => {
     console.error("Error switching isUsing!");
   }
 };
+
+// ユーザーIDとパスワードで検索する処理
+// export const getUser = async (user_id: string, password: string) => {
+//   try {
+//     const { data, error } = await supabase
+//       .from("Users")
+//       .select("user_id, user_name, password")
+//       .eq("user_id", user_id)
+//       .eq("password", password)
+//       .single();
+
+//     if (error) {
+//       throw error;
+//     }
+
+//     // ユーザー情報を返す
+//     return data;
+
+//     // 以下、エラー時の処理
+//   } catch (error) {
+//     console.error("Error fetching data!");
+//   }
+// };
