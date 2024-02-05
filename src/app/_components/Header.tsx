@@ -1,14 +1,34 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  createClientComponentClient,
+  type Session,
+} from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 
-const Header = () => {
+const Header = ({ session }: { session: Session | null }) => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const menuFunc = () => {
     setOpenMenu(!openMenu);
   };
+
+  const supabase = createClientComponentClient();
+  useEffect(() => {
+    async function getData() {
+      const { data } = await supabase.auth.getSession();
+      console.log(data);
+    }
+    getData();
+  }, []);
+
+  // TODO 2024/2/6 チラッとトップ画面が見えるため、何か対策をする。
+  const router = useRouter();
+  if (session === null) {
+    router.push("/login");
+  }
 
   return (
     <header className="flex items-center h-12 bg-amber-500">
@@ -63,7 +83,9 @@ const Header = () => {
           />
         </button>
       )}
+
       <ul className="sm:flex flex-row ml-auto hidden">
+        {/* TODO 2024/2/6 ユーザーネームをsupabase関数で取得して表示する */}
         <li className="pr-4 hover:text-white text-lg">
           <Link href={"/"}>Home</Link>
         </li>
@@ -74,7 +96,15 @@ const Header = () => {
           <Link href={"/contact"}>Contact</Link>
         </li>
         <li className="pr-4 hover:text-white text-lg">
-          <div>LogOut</div>
+          <form action="/api/auth/logout" method="post">
+            {/* TODO 2024/2/6 ログアウトボタンUIの修正 */}
+            <button
+              className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              type="submit"
+            >
+              ログアウト
+            </button>
+          </form>
         </li>
       </ul>
     </header>
