@@ -1,7 +1,9 @@
 "use client";
 import { getCourtInfoByPref } from "@/_utils/supabase/supabaseFunc";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+
+export let map_id: string;
 
 const CourtsList = (props: PrefectureCodes) => {
   const { lower_limit, upper_limit } = props;
@@ -16,6 +18,8 @@ const CourtsList = (props: PrefectureCodes) => {
     // 処理呼び出し
     getCourts();
   }, [lower_limit, upper_limit]);
+
+  const router = useRouter();
 
   return (
     // TODO テーブルのレイアウトを整える
@@ -35,7 +39,14 @@ const CourtsList = (props: PrefectureCodes) => {
             <td>{court.map_address}</td>
             <td>{court.isUsing ? "使用中" : "未使用"}</td>
             <td>
-              <Link href={`detail/${court.map_id}`}>詳細</Link>
+              <button
+                onClick={() => {
+                  map_id = court.map_id;
+                  router.push("/detail");
+                }}
+              >
+                詳細
+              </button>
             </td>
           </tr>
         ))}
