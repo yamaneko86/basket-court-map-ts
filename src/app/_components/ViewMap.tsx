@@ -125,6 +125,7 @@ const ViewMap = () => {
     userPos.lng,
   ]);
 
+  // TODO 1ユーザーにつき1回の使用中・未使用の切り替え機能を作成
   return (
     <div className="">
       <div>
