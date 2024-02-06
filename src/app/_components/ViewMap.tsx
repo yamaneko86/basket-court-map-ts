@@ -8,7 +8,7 @@ import {
 import { Suspense, useEffect, useState } from "react";
 import { getCourtInfo, switchIsUsing } from "@/_utils/supabase/supabaseFunc";
 import { distanceCalc } from "@/_utils/distanceCalc";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 const containerStyle = {
   width: "80%",
@@ -19,7 +19,7 @@ const zoomScale = 15;
 
 let distance: number;
 
-const ViewMap = (props: MapId) => {
+const ViewMap = () => {
   // バスケットコートの都道府県コード・名前・住所・使用状況を管理
   const [prefCode, setPrefCode] = useState<number>();
   const [mapName, setMapName] = useState<string>("");
@@ -38,6 +38,9 @@ const ViewMap = (props: MapId) => {
     lng: 0,
   });
 
+  // map_idをURLから取得("map_id"は動的ルートパス名)
+  const map_id_path = useParams().map_id.toString();
+
   // ２地点間の線を引くためのPath
   const polylinePath = [
     { lat: userPos.lat, lng: userPos.lng },
@@ -45,7 +48,7 @@ const ViewMap = (props: MapId) => {
   ];
 
   const handleSwitch = async () => {
-    await switchIsUsing(props.map_id, isUsing);
+    await switchIsUsing(map_id_path, isUsing);
     setIsUsing(!isUsing);
   };
 
@@ -94,7 +97,7 @@ const ViewMap = (props: MapId) => {
 
     // コートの都道府県コード・名前・住所・緯度経度・使用状況を取得
     const getCourtInfoDetail = async () => {
-      const data = await getCourtInfo(props.map_id);
+      const data = await getCourtInfo(map_id_path);
       if (data) {
         setPrefCode(data[0].prefecture_code);
         setMapName(data[0].map_name);
@@ -114,7 +117,7 @@ const ViewMap = (props: MapId) => {
       courtPos.lng
     );
   }, [
-    props.map_id,
+    map_id_path,
     isUsing,
     courtPos.lat,
     courtPos.lng,
