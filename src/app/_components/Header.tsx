@@ -15,14 +15,13 @@ const Header = ({ session }: { session: Session | null }) => {
     setOpenMenu(!openMenu);
   };
 
-  const supabase = createClientComponentClient();
-  useEffect(() => {
-    async function getData() {
-      const { data } = await supabase.auth.getSession();
-      console.log(data);
-    }
-    getData();
-  }, []);
+  // const supabase = createClientComponentClient();
+  // useEffect(() => {
+  //   async function getData() {
+  //     const { data } = await supabase.auth.getSession();
+  //   }
+  //   getData();
+  // }, [supabase.auth]);
 
   // TODO 2024/2/6 チラッとトップ画面が見えるため、何か対策をする。
   const router = useRouter();
@@ -55,7 +54,14 @@ const Header = ({ session }: { session: Session | null }) => {
               <Link href={"/contact"}>Contact</Link>
             </li>
             <li className="hover:text-white">
-              <button>ログアウト</button>
+              <form action="/api/auth/logout" method="post">
+                <button
+                  className="font-bold text-red-600 hover:text-white"
+                  type="submit"
+                >
+                  LOGOUT
+                </button>
+              </form>
             </li>
           </ul>
           <button
@@ -97,12 +103,11 @@ const Header = ({ session }: { session: Session | null }) => {
         </li>
         <li className="pr-4 hover:text-white text-lg">
           <form action="/api/auth/logout" method="post">
-            {/* TODO 2024/2/6 ログアウトボタンUIの修正 */}
             <button
-              className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              className="font-bold pr-4 text-red-600 hover:text-white text-lg"
               type="submit"
             >
-              ログアウト
+              LOGOUT
             </button>
           </form>
         </li>
