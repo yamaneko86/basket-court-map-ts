@@ -91,25 +91,23 @@ export const switchIsUsing = async (map_id: string, isUsing: boolean) => {
   }
 };
 
-// ユーザーIDとパスワードで検索する処理
-// export const getUser = async (user_id: string, password: string) => {
-//   try {
-//     const { data, error } = await supabase
-//       .from("Users")
-//       .select("user_id, user_name, password")
-//       .eq("user_id", user_id)
-//       .eq("password", password)
-//       .single();
+// IDでユーザーネームを検索する処理
+export const getUserNameById = async (id: string) => {
+  try {
+    const { data, error } = await supabase
+      .from("Users")
+      .select("user_name")
+      .eq("id", id);
 
-//     if (error) {
-//       throw error;
-//     }
+    if (error) {
+      throw error;
+    }
 
-//     // ユーザー情報を返す
-//     return data;
+    // ユーザーネームを返す
+    return data[0].user_name;
 
-//     // 以下、エラー時の処理
-//   } catch (error) {
-//     console.error("Error fetching data!");
-//   }
-// };
+    // 以下、エラー時の処理
+  } catch (error) {
+    console.error("Error fetching data!");
+  }
+};

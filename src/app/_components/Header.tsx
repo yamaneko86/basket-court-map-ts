@@ -2,14 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import {
-  createClientComponentClient,
-  type Session,
-} from "@supabase/auth-helpers-nextjs";
+import { type Session } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import { getUserNameById } from "@/_utils/supabase/supabaseFunc";
 
 const Header = ({ session }: { session: Session | null }) => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>("名無し");
 
   const menuFunc = () => {
     setOpenMenu(!openMenu);
@@ -29,6 +28,21 @@ const Header = ({ session }: { session: Session | null }) => {
     router.push("/login");
   }
 
+  // ユーザーネームを取得
+  useEffect(() => {
+    const getUserName = async () => {
+      if (session) {
+        const logged_in_user_name: string = await getUserNameById(
+          session?.user?.id
+        );
+        setUserName(logged_in_user_name);
+      }
+    };
+
+    // 処理呼び出し
+    getUserName();
+  }, [session]);
+
   return (
     <header className="flex items-center h-12 bg-amber-500">
       <Link href={"/"} className="text-lg font-bold pl-4 pr-1">
@@ -41,6 +55,7 @@ const Header = ({ session }: { session: Session | null }) => {
         width={25}
         height={25}
       />
+      <div>{userName}</div>
       {openMenu ? (
         <>
           <ul className="sm:hidden flex flex-col animate-fade-in absolute inset-20 z-10 justify-evenly items-center bg-amber-500 border-2 rounded-lg text-3xl font-bold">
@@ -91,7 +106,6 @@ const Header = ({ session }: { session: Session | null }) => {
       )}
 
       <ul className="sm:flex flex-row ml-auto hidden">
-        {/* TODO 2024/2/6 ユーザーネームをsupabase関数で取得して表示する */}
         <li className="pr-4 hover:text-white text-lg">
           <Link href={"/"}>Home</Link>
         </li>
