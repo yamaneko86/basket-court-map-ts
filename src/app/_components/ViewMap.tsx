@@ -1,13 +1,14 @@
 "use client";
 import {
   GoogleMap,
+  InfoWindow,
   LoadScriptNext,
   MarkerF,
   PolylineF,
 } from "@react-google-maps/api";
 import { Suspense, useEffect, useState } from "react";
 import { getCourtInfo, switchIsUsing } from "@/_utils/supabase/supabaseFunc";
-import { distanceCalc } from "@/_utils/distanceCalc";
+import { distanceCalc } from "@/_utils/calcFunc";
 import { useParams, useRouter } from "next/navigation";
 
 const containerStyle = {
@@ -34,6 +35,12 @@ const ViewMap = () => {
 
   // バスケットコートの緯度経度を管理
   const [courtPos, setCourtPos] = useState<{ lat: number; lng: number }>({
+    lat: 0,
+    lng: 0,
+  });
+
+  // バスケットコートの緯度経度を管理
+  const [infoPos, setInfoPos] = useState<{ lat: number; lng: number }>({
     lat: 0,
     lng: 0,
   });
@@ -103,6 +110,7 @@ const ViewMap = () => {
         setMapName(data[0].map_name);
         setMapAddress(data[0].map_address);
         setCourtPos({ lat: data[0].latitude, lng: data[0].longitude });
+        setInfoPos({ lat: data[0].latitude + 0.001, lng: data[0].longitude });
         setIsUsing(data[0].isUsing);
       }
     };
@@ -147,8 +155,20 @@ const ViewMap = () => {
             center={userPos}
             zoom={zoomScale}
           >
-            <MarkerF visible={true} position={userPos} />
+            <MarkerF
+              visible={true}
+              position={userPos}
+              options={{
+                // icon: require("../../../public/images/CurrentLocation.png"),
+                icon: "https://maps.google.com/mapfiles/ms/micons/man.png",
+              }}
+            />
             <MarkerF visible={true} position={courtPos} />
+            <InfoWindow position={infoPos}>
+              <div>
+                <h1>The Court is here!</h1>
+              </div>
+            </InfoWindow>
             <PolylineF path={polylinePath} />
           </GoogleMap>
         </LoadScriptNext>
