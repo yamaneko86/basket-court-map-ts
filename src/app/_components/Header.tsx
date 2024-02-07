@@ -49,8 +49,7 @@ const Header = ({ session }: { session: Session | null }) => {
         Basket Court Map
       </Link>
       <Image
-        // src={"/images/BasketBall_icon.png"}
-        src={"/images/BasketGoal.svg"}
+        src={"/images/BasketGoal_Header.svg"}
         alt="BasketBall_icon"
         width={25}
         height={25}
