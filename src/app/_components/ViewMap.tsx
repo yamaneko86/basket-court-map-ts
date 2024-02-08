@@ -2,13 +2,13 @@
 import {
   GoogleMap,
   InfoWindow,
-  LoadScriptNext,
   MarkerF,
   PolylineF,
+  useJsApiLoader,
 } from "@react-google-maps/api";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getCourtInfo, switchIsUsing } from "@/_utils/supabase/supabaseFunc";
-import { distanceCalc } from "@/_utils/calcFunc";
+import { calcCenter, calcSwNe, distanceCalc } from "@/_utils/calcFunc";
 import { useParams, useRouter } from "next/navigation";
 import iconPath from "../../../public/images/CurrentLocation.png";
 
@@ -16,8 +16,6 @@ const containerStyle = {
   width: "80%",
   height: "70vh",
 };
-
-const zoomScale = 15;
 
 let distance: number;
 
@@ -40,7 +38,7 @@ const ViewMap = () => {
     lng: 0,
   });
 
-  // バスケットコートの緯度経度を管理
+  // マップ上の吹き出しの緯度経度を管理
   const [infoPos, setInfoPos] = useState<{ lat: number; lng: number }>({
     lat: 0,
     lng: 0,
@@ -85,6 +83,27 @@ const ViewMap = () => {
       }
     }
   };
+
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
+  });
+
+  const [map, setMap] = useState<google.maps.Map>();
+
+  const onLoad = useCallback(
+    function callback(map: google.maps.Map) {
+      const bounds = calcSwNe(
+        userPos.lat,
+        userPos.lng,
+        courtPos.lat,
+        courtPos.lng
+      );
+      map.fitBounds(bounds, 5);
+      setMap(map);
+    },
+    [courtPos.lat, courtPos.lng, userPos.lat, userPos.lng]
+  );
 
   useEffect(() => {
     // ユーザの現在の緯度経度を取得
@@ -149,28 +168,36 @@ const ViewMap = () => {
         </button>
         <br />
       </div>
-      <LoadScriptNext
-        googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
-      >
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={userPos}
-          zoom={zoomScale}
-        >
-          <MarkerF visible={true} position={userPos} icon={iconPath.src} />
-          <MarkerF visible={true} position={courtPos} />
-          <InfoWindow position={infoPos}>
-            <div>
-              <h1>The Court is here!</h1>
-            </div>
-          </InfoWindow>
-          <PolylineF path={polylinePath} />
-        </GoogleMap>
-      </LoadScriptNext>
-      <div>2点間の距離:{distance}km</div>
-      <button type="button" onClick={() => switchHref()}>
-        一覧に戻る
-      </button>
+      {isLoaded ? (
+        <>
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={calcCenter(
+              userPos.lat,
+              userPos.lng,
+              courtPos.lat,
+              courtPos.lng
+            )}
+            zoom={16}
+            onLoad={onLoad}
+          >
+            <MarkerF visible={true} position={userPos} icon={iconPath.src} />
+            <MarkerF visible={true} position={courtPos} />
+            <InfoWindow position={infoPos}>
+              <div>
+                <h1>The Court is here!</h1>
+              </div>
+            </InfoWindow>
+            <PolylineF path={polylinePath} />
+          </GoogleMap>
+          <div>2点間の距離:{distance}km</div>
+          <button type="button" onClick={() => switchHref()}>
+            一覧に戻る
+          </button>
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

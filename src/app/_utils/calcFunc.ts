@@ -34,3 +34,38 @@ export const distanceCalc = (
 
   return distance;
 };
+
+// 南西と北東の計算
+export const calcSwNe = (
+  curLat: number, //現在地の緯度
+  curLng: number, //現在地の経度
+  desLat: number, //目的地(バスケットコート)の緯度
+  desLng: number //目的地(バスケットコート)の経度
+): google.maps.LatLngBounds => {
+  let maxLat: number = Math.max(curLat, desLat);
+  let minLat: number = Math.min(curLat, desLat);
+  let maxLng: number = Math.max(curLng, desLng);
+  let minLng: number = Math.min(curLng, desLng);
+
+  let sw = new google.maps.LatLng(maxLat, minLng);
+  let ne = new google.maps.LatLng(minLat, maxLng);
+
+  let bounds = new google.maps.LatLngBounds(sw, ne);
+
+  return bounds;
+};
+
+// 2地点の中心を計算
+export const calcCenter = (
+  curLat: number, //現在地の緯度
+  curLng: number, //現在地の経度
+  desLat: number, //目的地(バスケットコート)の緯度
+  desLng: number //目的地(バスケットコート)の経度
+): google.maps.LatLng => {
+  const avgLat: number = (curLat + desLat) / 2;
+  const avgLng: number = (curLng + desLng) / 2;
+
+  const center = new google.maps.LatLng(avgLat, avgLng);
+
+  return center;
+};
