@@ -44,33 +44,82 @@ const Header = ({ session }: { session: Session | null }) => {
   }, [session]);
 
   return (
-    <header className="flex items-center h-12 bg-amber-500">
-      <Link href={"/"} className="text-lg font-bold pl-4 pr-1">
-        Basket Court Map
-      </Link>
-      <Image
-        src={"/images/BasketGoal_Header.svg"}
-        alt="BasketBall_icon"
-        width={25}
-        height={25}
-      />
-      <div>{userName}</div>
-      {openMenu ? (
-        <>
-          <ul className="sm:hidden flex flex-col animate-fade-in absolute inset-20 z-10 justify-evenly items-center bg-amber-500 border-2 rounded-lg text-3xl font-bold">
-            <li className="hover:text-white">
+    <>
+      {session ? (
+        <header className="flex items-center h-12 bg-amber-500">
+          <Link href={"/"} className="text-lg font-bold pl-4 pr-1">
+            Basket Court Map
+          </Link>
+          <Image
+            src={"/images/BasketGoal_Header.svg"}
+            alt="BasketBall_icon"
+            width={25}
+            height={25}
+          />
+          <div>{userName}</div>
+          {openMenu ? (
+            <>
+              <ul className="sm:hidden flex flex-col animate-fade-in absolute inset-20 z-10 justify-evenly items-center bg-amber-500 border-2 rounded-lg text-3xl font-bold">
+                <li className="hover:text-white">
+                  <Link href={"/"}>Home</Link>
+                </li>
+                <li className="hover:text-white">
+                  <Link href={"/about"}>About</Link>
+                </li>
+                <li className="hover:text-white">
+                  <Link href={"/contact"}>Contact</Link>
+                </li>
+                <li className="hover:text-white">
+                  <form action="/api/auth/logout" method="post">
+                    <button
+                      className="font-bold text-red-600 hover:text-white"
+                      type="submit"
+                    >
+                      LOGOUT
+                    </button>
+                  </form>
+                </li>
+              </ul>
+              <button
+                onClick={() => menuFunc()}
+                className="sm:hidden flex justify-center ml-auto pr-4 text-white"
+              >
+                <Image
+                  src={"/images/Cancel.png"}
+                  alt="cancel"
+                  width={40}
+                  height={40}
+                />
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => menuFunc()}
+              className="sm:hidden flex justify-center ml-auto pr-4 text-white"
+            >
+              <Image
+                src={"/images/HamburgerMenu.png"}
+                alt="menu"
+                width={40}
+                height={40}
+              />
+            </button>
+          )}
+
+          <ul className="sm:flex flex-row ml-auto hidden">
+            <li className="pr-4 hover:text-white text-lg">
               <Link href={"/"}>Home</Link>
             </li>
-            <li className="hover:text-white">
+            <li className="pr-4 hover:text-white text-lg">
               <Link href={"/about"}>About</Link>
             </li>
-            <li className="hover:text-white">
+            <li className="pr-4 hover:text-white text-lg">
               <Link href={"/contact"}>Contact</Link>
             </li>
-            <li className="hover:text-white">
+            <li className="pr-4 hover:text-white text-lg">
               <form action="/api/auth/logout" method="post">
                 <button
-                  className="font-bold text-red-600 hover:text-white"
+                  className="font-bold pr-4 text-red-600 hover:text-white text-lg"
                   type="submit"
                 >
                   LOGOUT
@@ -78,54 +127,11 @@ const Header = ({ session }: { session: Session | null }) => {
               </form>
             </li>
           </ul>
-          <button
-            onClick={() => menuFunc()}
-            className="sm:hidden flex justify-center ml-auto pr-4 text-white"
-          >
-            <Image
-              src={"/images/Cancel.png"}
-              alt="cancel"
-              width={40}
-              height={40}
-            />
-          </button>
-        </>
+        </header>
       ) : (
-        <button
-          onClick={() => menuFunc()}
-          className="sm:hidden flex justify-center ml-auto pr-4 text-white"
-        >
-          <Image
-            src={"/images/HamburgerMenu.png"}
-            alt="menu"
-            width={40}
-            height={40}
-          />
-        </button>
+        <div className="fixed h-full w-full bg-white"></div>
       )}
-
-      <ul className="sm:flex flex-row ml-auto hidden">
-        <li className="pr-4 hover:text-white text-lg">
-          <Link href={"/"}>Home</Link>
-        </li>
-        <li className="pr-4 hover:text-white text-lg">
-          <Link href={"/about"}>About</Link>
-        </li>
-        <li className="pr-4 hover:text-white text-lg">
-          <Link href={"/contact"}>Contact</Link>
-        </li>
-        <li className="pr-4 hover:text-white text-lg">
-          <form action="/api/auth/logout" method="post">
-            <button
-              className="font-bold pr-4 text-red-600 hover:text-white text-lg"
-              type="submit"
-            >
-              LOGOUT
-            </button>
-          </form>
-        </li>
-      </ul>
-    </header>
+    </>
   );
 };
 
