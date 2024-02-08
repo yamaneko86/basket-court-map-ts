@@ -6,10 +6,11 @@ import {
   MarkerF,
   PolylineF,
 } from "@react-google-maps/api";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getCourtInfo, switchIsUsing } from "@/_utils/supabase/supabaseFunc";
 import { distanceCalc } from "@/_utils/calcFunc";
 import { useParams, useRouter } from "next/navigation";
+import iconPath from "../../../public/images/CurrentLocation.png";
 
 const containerStyle = {
   width: "80%",
@@ -148,33 +149,24 @@ const ViewMap = () => {
         </button>
         <br />
       </div>
-      <Suspense fallback={<p>Loading...</p>}>
-        <LoadScriptNext
-          googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
+      <LoadScriptNext
+        googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
+      >
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={userPos}
+          zoom={zoomScale}
         >
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={userPos}
-            zoom={zoomScale}
-          >
-            <MarkerF
-              visible={true}
-              position={userPos}
-              options={{
-                // icon: require("../../../public/images/CurrentLocation.png"),
-                icon: "https://maps.google.com/mapfiles/ms/micons/man.png",
-              }}
-            />
-            <MarkerF visible={true} position={courtPos} />
-            <InfoWindow position={infoPos}>
-              <div>
-                <h1>The Court is here!</h1>
-              </div>
-            </InfoWindow>
-            <PolylineF path={polylinePath} />
-          </GoogleMap>
-        </LoadScriptNext>
-      </Suspense>
+          <MarkerF visible={true} position={userPos} icon={iconPath.src} />
+          <MarkerF visible={true} position={courtPos} />
+          <InfoWindow position={infoPos}>
+            <div>
+              <h1>The Court is here!</h1>
+            </div>
+          </InfoWindow>
+          <PolylineF path={polylinePath} />
+        </GoogleMap>
+      </LoadScriptNext>
       <div>2点間の距離:{distance}km</div>
       <button type="button" onClick={() => switchHref()}>
         一覧に戻る
