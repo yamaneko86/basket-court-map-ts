@@ -22,7 +22,6 @@ const Header = ({ session }: { session: Session | null }) => {
   //   getData();
   // }, [supabase.auth]);
 
-  // TODO 2024/2/6 チラッとトップ画面が見えるため、何か対策をする。
   const router = useRouter();
   if (session === null) {
     router.push("/login");
