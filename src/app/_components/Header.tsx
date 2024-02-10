@@ -8,7 +8,7 @@ import { getUserNameById } from "@/_utils/supabase/supabaseFunc";
 
 const Header = ({ session }: { session: Session | null }) => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>("名無し");
+  // const [userName, setUserName] = useState<string>("名無し");
 
   const menuFunc = () => {
     setOpenMenu(!openMenu);
@@ -28,19 +28,19 @@ const Header = ({ session }: { session: Session | null }) => {
   }
 
   // ユーザーネームを取得
-  useEffect(() => {
-    const getUserName = async () => {
-      if (session) {
-        const logged_in_user_name: string = await getUserNameById(
-          session?.user?.id
-        );
-        setUserName(logged_in_user_name);
-      }
-    };
+  // useEffect(() => {
+  //   const getUserName = async () => {
+  //     if (session) {
+  //       const logged_in_user_name: string = await getUserNameById(
+  //         session?.user?.id
+  //       );
+  //       setUserName(logged_in_user_name);
+  //     }
+  //   };
 
-    // 処理呼び出し
-    getUserName();
-  }, [session]);
+  // 処理呼び出し
+  //   getUserName();
+  // }, [session]);
 
   return (
     <>
@@ -55,7 +55,6 @@ const Header = ({ session }: { session: Session | null }) => {
             width={25}
             height={25}
           />
-          <div>{userName}</div>
           {openMenu ? (
             <>
               <ul className="sm:hidden flex flex-col animate-fade-in absolute inset-20 z-10 justify-evenly items-center bg-amber-500 border-2 rounded-lg text-3xl font-bold">
