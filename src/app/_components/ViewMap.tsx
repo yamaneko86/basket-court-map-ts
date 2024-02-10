@@ -8,7 +8,7 @@ import {
 } from "@react-google-maps/api";
 import { useCallback, useEffect, useState } from "react";
 import { getCourtInfo, switchIsUsing } from "@/_utils/supabase/supabaseFunc";
-import { calcSwNe, distanceCalc } from "@/_utils/calcFunc";
+import { calcCenter, calcSwNe, distanceCalc } from "@/_utils/calcFunc";
 import { useParams, useRouter } from "next/navigation";
 import iconPath from "../../../public/images/CurrentLocation.png";
 
@@ -27,13 +27,13 @@ const ViewMap = () => {
   const [isUsing, setIsUsing] = useState<boolean>(false);
 
   // 現在地の緯度経度を管理
-  const [userPos, setUserPos] = useState<{ lat: number; lng: number }>({
+  let [userPos, setUserPos] = useState<{ lat: number; lng: number }>({
     lat: 0,
     lng: 0,
   });
 
   // バスケットコートの緯度経度を管理
-  const [courtPos, setCourtPos] = useState<{ lat: number; lng: number }>({
+  let [courtPos, setCourtPos] = useState<{ lat: number; lng: number }>({
     lat: 0,
     lng: 0,
   });
@@ -43,6 +43,10 @@ const ViewMap = () => {
     lat: 0,
     lng: 0,
   });
+
+  const [map, setMap] = useState<google.maps.Map>();
+
+  const onLoad = useCallback((map: google.maps.Map) => setMap(map), []);
 
   // map_idをURLから取得("map_id"は動的ルートパス名)
   const map_id_path = useParams().map_id.toString();
@@ -89,10 +93,6 @@ const ViewMap = () => {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
   });
 
-  const [map, setMap] = useState<google.maps.Map>();
-
-  const onLoad = useCallback((map: google.maps.Map) => setMap(map), []);
-
   // const onLoad = useCallback(
   //   function callback(map: google.maps.Map) {
   // const bounds = calcSwNe(
@@ -138,25 +138,34 @@ const ViewMap = () => {
       }
     };
 
-    if (map) {
-      const bounds = calcSwNe(
-        userPos.lat,
-        userPos.lng,
-        courtPos.lat,
-        courtPos.lng
-      );
-      map.fitBounds(bounds);
-    }
-
     // 処理呼び出し
-    getUserLatLng();
     getCourtInfoDetail();
+    getUserLatLng();
     distance = distanceCalc(
       userPos.lat,
       userPos.lng,
       courtPos.lat,
       courtPos.lng
     );
+
+    // マーカーが全てマップ内に表示されるようにする
+    if (map) {
+      const center = calcCenter(
+        userPos.lat,
+        userPos.lng,
+        courtPos.lat,
+        courtPos.lng
+      );
+      const bounds = calcSwNe(
+        userPos.lat,
+        userPos.lng,
+        courtPos.lat,
+        courtPos.lng
+      );
+
+      map.setCenter(center);
+      map.fitBounds(bounds, 20);
+    }
   }, [
     map_id_path,
     isUsing,
@@ -167,7 +176,6 @@ const ViewMap = () => {
     map,
   ]);
 
-  // TODO マーカーが全てマップ内に表示されるようにする
   // TODO 1ユーザーにつき1回の使用中・未使用の切り替え機能を作成
 
   return (
@@ -187,13 +195,7 @@ const ViewMap = () => {
 
           <GoogleMap
             mapContainerStyle={containerStyle}
-            // center={calcCenter(
-            //   userPos.lat,
-            //   userPos.lng,
-            //   courtPos.lat,
-            //   courtPos.lng
-            // )}
-            // zoom={10}
+            zoom={10}
             onLoad={onLoad}
           >
             <MarkerF visible={true} position={userPos} icon={iconPath.src} />
