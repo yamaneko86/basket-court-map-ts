@@ -1,12 +1,15 @@
 "use client";
 import { supabase } from "@/_utils/supabase/supabase";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConf, setPasswordConf] = useState("");
+
+  const router = useRouter();
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
@@ -21,7 +24,8 @@ export default function SignUp() {
       if (signUpError) {
         throw signUpError;
       }
-      alert("登録完了メールを確認してください");
+      alert("登録が完了しました。ログインして下さい。");
+      router.push("/login");
     } catch (error) {
       alert("エラーが発生しました");
     }
