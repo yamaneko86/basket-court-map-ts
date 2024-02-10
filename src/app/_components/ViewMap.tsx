@@ -8,7 +8,7 @@ import {
 } from "@react-google-maps/api";
 import { useCallback, useEffect, useState } from "react";
 import { getCourtInfo, switchIsUsing } from "@/_utils/supabase/supabaseFunc";
-import { calcCenter, calcSwNe, distanceCalc } from "@/_utils/calcFunc";
+import { calcSwNe, distanceCalc } from "@/_utils/calcFunc";
 import { useParams, useRouter } from "next/navigation";
 import iconPath from "../../../public/images/CurrentLocation.png";
 
@@ -91,19 +91,22 @@ const ViewMap = () => {
 
   const [map, setMap] = useState<google.maps.Map>();
 
-  const onLoad = useCallback(
-    function callback(map: google.maps.Map) {
-      const bounds = calcSwNe(
-        userPos.lat,
-        userPos.lng,
-        courtPos.lat,
-        courtPos.lng
-      );
-      map.fitBounds(bounds, 5);
-      setMap(map);
-    },
-    [courtPos.lat, courtPos.lng, userPos.lat, userPos.lng]
-  );
+  const onLoad = useCallback((map: google.maps.Map) => setMap(map), []);
+
+  // const onLoad = useCallback(
+  //   function callback(map: google.maps.Map) {
+  // const bounds = calcSwNe(
+  //   userPos.lat,
+  //   userPos.lng,
+  //   courtPos.lat,
+  //   courtPos.lng
+  // );
+  //     const bounds = new google.maps.LatLngBounds(userPos);
+  //     map.fitBounds(bounds);
+  //     setMap(map);
+  //   },
+  //   [courtPos.lat, courtPos.lng, userPos.lat, userPos.lng]
+  // );
 
   useEffect(() => {
     // ユーザの現在の緯度経度を取得
@@ -135,6 +138,16 @@ const ViewMap = () => {
       }
     };
 
+    if (map) {
+      const bounds = calcSwNe(
+        userPos.lat,
+        userPos.lng,
+        courtPos.lat,
+        courtPos.lng
+      );
+      map.fitBounds(bounds);
+    }
+
     // 処理呼び出し
     getUserLatLng();
     getCourtInfoDetail();
@@ -151,34 +164,36 @@ const ViewMap = () => {
     courtPos.lng,
     userPos.lat,
     userPos.lng,
+    map,
   ]);
 
   // TODO マーカーが全てマップ内に表示されるようにする
   // TODO 1ユーザーにつき1回の使用中・未使用の切り替え機能を作成
 
   return (
-    <div className="">
-      <div>
-        {mapName}
-        <br />
-        {mapAddress}
-        <br />
-        <button onClick={() => handleSwitch()}>
-          {isUsing ? "使用中" : "未使用"}
-        </button>
-        <br />
-      </div>
+    <>
       {isLoaded ? (
-        <>
+        <div>
+          <div>
+            {mapName}
+            <br />
+            {mapAddress}
+            <br />
+            <button onClick={() => handleSwitch()}>
+              {isUsing ? "使用中" : "未使用"}
+            </button>
+            <br />
+          </div>
+
           <GoogleMap
             mapContainerStyle={containerStyle}
-            center={calcCenter(
-              userPos.lat,
-              userPos.lng,
-              courtPos.lat,
-              courtPos.lng
-            )}
-            zoom={16}
+            // center={calcCenter(
+            //   userPos.lat,
+            //   userPos.lng,
+            //   courtPos.lat,
+            //   courtPos.lng
+            // )}
+            // zoom={10}
             onLoad={onLoad}
           >
             <MarkerF visible={true} position={userPos} icon={iconPath.src} />
@@ -188,17 +203,24 @@ const ViewMap = () => {
                 <h1>The Court is here!</h1>
               </div>
             </InfoWindow>
-            <PolylineF path={polylinePath} />
+            <PolylineF
+              path={polylinePath}
+              // options={{ strokeColor: "#ff0000" }}
+            />
           </GoogleMap>
           <div>2点間の距離:{distance}km</div>
           <button type="button" onClick={() => switchHref()}>
             一覧に戻る
           </button>
-        </>
+        </div>
       ) : (
-        <></>
+        <div className="flex items-center justify-center ">
+          <div className="text-4xl font-bold text-gray-800 animate-pulse">
+            Loading...
+          </div>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
