@@ -207,7 +207,7 @@ const ViewMap = () => {
             </InfoWindow>
             <PolylineF
               path={polylinePath}
-              // options={{ strokeColor: "#ff0000" }}
+              options={{ strokeColor: "#ff0000" }}
             />
           </GoogleMap>
           <div>2点間の距離:{distance}km</div>
