@@ -164,7 +164,7 @@ const ViewMap = () => {
       );
 
       map.setCenter(center);
-      map.fitBounds(bounds, 20);
+      map.fitBounds(bounds);
     }
   }, [
     map_id_path,
