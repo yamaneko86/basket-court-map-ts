@@ -1,6 +1,5 @@
 import CourtsList from "@/_components/CourtsList";
 import Footer from "@/_components/Footer";
-import Header from "@/_components/Header";
 import SupabaseListener from "@/_components/supabaseListener";
 
 export default function Chubu() {
