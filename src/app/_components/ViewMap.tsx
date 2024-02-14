@@ -38,12 +38,6 @@ const ViewMap = () => {
     lng: 0,
   });
 
-  // マップ上の吹き出しの緯度経度を管理
-  const [infoPos, setInfoPos] = useState<{ lat: number; lng: number }>({
-    lat: 0,
-    lng: 0,
-  });
-
   const [map, setMap] = useState<google.maps.Map>();
 
   const onLoad = useCallback((map: google.maps.Map) => setMap(map), []);
@@ -133,7 +127,6 @@ const ViewMap = () => {
         setMapName(data[0].map_name);
         setMapAddress(data[0].map_address);
         setCourtPos({ lat: data[0].latitude, lng: data[0].longitude });
-        setInfoPos({ lat: data[0].latitude + 0.001, lng: data[0].longitude });
         setIsUsing(data[0].isUsing);
       }
     };
@@ -199,10 +192,23 @@ const ViewMap = () => {
             onLoad={onLoad}
           >
             <MarkerF visible={true} position={userPos} icon={iconPath.src} />
-            <MarkerF visible={true} position={courtPos} />
-            <InfoWindow position={infoPos}>
+            <InfoWindow
+              position={userPos}
+              options={{ pixelOffset: new google.maps.Size(0, -42.5) }}
+            >
               <div>
-                <h1>The Court is here!</h1>
+                <h1 className="text-md font-bold">I&apos;m here!</h1>
+              </div>
+            </InfoWindow>
+            <MarkerF visible={true} position={courtPos} />
+            <InfoWindow
+              position={courtPos}
+              options={{ pixelOffset: new google.maps.Size(0, -37.5) }}
+            >
+              <div>
+                <h1 className="text-md font-bold text-red-500">
+                  The Court is here!
+                </h1>
               </div>
             </InfoWindow>
             {/* <PolylineF
