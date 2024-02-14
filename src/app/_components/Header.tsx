@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { type Session } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { getUserNameById } from "@/_utils/supabase/supabaseFunc";
@@ -13,14 +13,6 @@ const Header = ({ session }: { session: Session | null }) => {
   const menuFunc = () => {
     setOpenMenu(!openMenu);
   };
-
-  // const supabase = createClientComponentClient();
-  // useEffect(() => {
-  //   async function getData() {
-  //     const { data } = await supabase.auth.getSession();
-  //   }
-  //   getData();
-  // }, [supabase.auth]);
 
   const router = useRouter();
   if (session === null) {
