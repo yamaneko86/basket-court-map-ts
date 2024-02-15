@@ -3,7 +3,6 @@ import {
   GoogleMap,
   InfoWindow,
   MarkerF,
-  PolylineF,
   useJsApiLoader,
 } from "@react-google-maps/api";
 import { useCallback, useEffect, useState } from "react";
@@ -45,12 +44,6 @@ const ViewMap = () => {
   // map_idをURLから取得("map_id"は動的ルートパス名)
   const map_id_path = useParams().map_id.toString();
 
-  // ２地点間の線を引くためのPath
-  // const polylinePath = [
-  //   { lat: userPos.lat, lng: userPos.lng },
-  //   { lat: courtPos.lat, lng: courtPos.lng },
-  // ];
-
   const handleSwitch = async () => {
     await switchIsUsing(map_id_path, isUsing);
     setIsUsing(!isUsing);
@@ -86,21 +79,6 @@ const ViewMap = () => {
     id: "google-map-script",
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
   });
-
-  // const onLoad = useCallback(
-  //   function callback(map: google.maps.Map) {
-  // const bounds = calcSwNe(
-  //   userPos.lat,
-  //   userPos.lng,
-  //   courtPos.lat,
-  //   courtPos.lng
-  // );
-  //     const bounds = new google.maps.LatLngBounds(userPos);
-  //     map.fitBounds(bounds);
-  //     setMap(map);
-  //   },
-  //   [courtPos.lat, courtPos.lng, userPos.lat, userPos.lng]
-  // );
 
   useEffect(() => {
     // ユーザの現在の緯度経度を取得
@@ -211,10 +189,6 @@ const ViewMap = () => {
                 </h1>
               </div>
             </InfoWindow>
-            {/* <PolylineF
-              path={polylinePath}
-              options={{ strokeColor: "#ff0000" }}
-            /> */}
           </GoogleMap>
           <div>2点間の距離:{distance}km</div>
           <button type="button" onClick={() => switchHref()}>
