@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { type Session } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { getUserNameById } from "@/_utils/supabase/supabaseFunc";
+// import { getUserNameById } from "@/_utils/supabase/supabaseFunc";
 
 const Header = ({ session }: { session: Session | null }) => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
