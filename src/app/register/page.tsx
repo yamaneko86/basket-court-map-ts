@@ -32,8 +32,7 @@ export default function SignUp() {
   };
 
   return (
-    // TODO 2024/2/6 レイアウトの修正
-    <div className="flex items-center justify-center">
+    <div className="flex h-screen items-center justify-center">
       <form className="space-y-4" onSubmit={onSubmit}>
         <div className="flex flex-col">
           <label
@@ -98,7 +97,10 @@ export default function SignUp() {
           </button>
         </div>
         <div>
-          <Link href={"/login"}>ログインはこちら</Link>
+          ログインは
+          <Link href={"/login"} className="underline">
+            こちら
+          </Link>
         </div>
       </form>
     </div>

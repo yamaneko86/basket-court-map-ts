@@ -2,8 +2,7 @@ import Link from "next/link";
 
 export default function SignIn() {
   return (
-    // TODO 2024/2/6 レイアウトの修正
-    <div className="flex items-center justify-center">
+    <div className="flex h-screen items-center justify-center">
       <form action="/api/auth/login" method="post" className="space-y-4">
         <div className="flex flex-col">
           <label
@@ -43,7 +42,10 @@ export default function SignIn() {
           </button>
         </div>
         <div>
-          <Link href={"/register"}>アカウントの新規登録はこちら</Link>
+          アカウントの新規登録は
+          <Link href={"/register"} className="underline">
+            こちら
+          </Link>
         </div>
       </form>
     </div>
