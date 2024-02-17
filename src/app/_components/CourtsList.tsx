@@ -18,31 +18,59 @@ const CourtsList = (props: PrefectureCodes) => {
   }, [lower_limit, upper_limit]);
 
   return (
-    // TODO テーブルのレイアウトを整える
-    <table className="table-fixed">
-      <thead>
-        <tr>
-          <th>コート名</th>
-          <th>住所</th>
-          <th>使用状況</th>
-          <th>詳細</th>
-        </tr>
-      </thead>
-      <tbody>
-        {courts.map((court: CourtInfo) => (
-          <tr key={court.map_id}>
-            <td>{court.map_name}</td>
-            <td>{court.map_address}</td>
-            <td>{court.isUsing ? "使用中" : "未使用"}</td>
-            <td>
-              <button>
-                <Link href={`detail/${court.map_id}`}>詳細</Link>
-              </button>
-            </td>
+    <div className="overflow-x-auto">
+      <table className="w-full divide-y divide-gray-200">
+        <thead className="bg-gray-50">
+          <tr>
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+            >
+              コート名
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+            >
+              住所
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+            >
+              使用状況
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+            >
+              詳細
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className="bg-white divide-y divide-gray-200">
+          {courts.map((court: CourtInfo) => (
+            <tr
+              key={court.map_id}
+              className={court.isUsing ? "bg-red-100" : "bg-green-100"}
+            >
+              <td className="px-6 py-4 whitespace-nowrap">{court.map_name}</td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {court.map_address}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {court.isUsing ? "使用中" : "未使用"}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <button className="text-indigo-600 hover:text-indigo-900">
+                  <Link href={`detail/${court.map_id}`}>詳細</Link>
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
