@@ -149,6 +149,8 @@ const ViewMap = () => {
 
   // TODO 1ユーザーにつき1回の使用中・未使用の切り替え機能を作成
 
+  // TODO UIをテーブルに作り替える
+
   return (
     <>
       {isLoaded ? (
@@ -196,9 +198,11 @@ const ViewMap = () => {
           </button>
         </div>
       ) : (
-        <div className="flex items-center justify-center ">
-          <div className="text-4xl font-bold text-gray-800 animate-pulse">
-            Loading...
+        <div className="fixed h-full w-full bg-white">
+          <div className="flex items-center justify-center h-full">
+            <div className="text-5xl font-bold text-gray-800 animate-bounce">
+              Loading...
+            </div>
           </div>
         </div>
       )}
