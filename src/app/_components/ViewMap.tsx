@@ -10,10 +10,12 @@ import { getCourtInfo, switchIsUsing } from "@/_utils/supabase/supabaseFunc";
 import { calcCenter, calcSwNe, distanceCalc } from "@/_utils/calcFunc";
 import { useParams, useRouter } from "next/navigation";
 import iconPath from "../../../public/images/CurrentLocation.png";
+import Link from "next/link";
+import Image from "next/image";
 
 const containerStyle = {
-  width: "80%",
-  height: "70vh",
+  width: "98%",
+  height: "60vh",
 };
 
 let distance: number;
@@ -154,48 +156,89 @@ const ViewMap = () => {
   return (
     <>
       {isLoaded ? (
-        <div>
+        <div className="overflow-auto">
           <div>
-            {mapName}
-            <br />
-            {mapAddress}
-            <br />
-            <button onClick={() => handleSwitch()}>
-              {isUsing ? "使用中" : "未使用"}
-            </button>
-            <br />
+            <div className="bg-orange-100">
+              <Link href={"/"} className="text-sm pl-2 pr-2 hover:text-red-500">
+                トップ
+              </Link>
+              {">"}
+              <button
+                type="button"
+                className="text-sm pl-2 pr-2 hover:text-red-500"
+                onClick={() => switchHref()}
+              >
+                コート一覧
+              </button>
+            </div>
+            <div className="text-xl font-bold border-l-8 border-t-0 border-r-0 border-b-0 border-l-red-500 pl-2 ml-2 mt-2 mb-1">
+              {mapName}
+            </div>
+            <div className="flex">
+              <div className="flex flex-col">
+                <table className="ml-3 mt-1">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <Image
+                          src={"/images/AddressIcon.svg"}
+                          alt="BasketBall_icon"
+                          width={20}
+                          height={20}
+                          className="mr-4"
+                        />
+                      </td>
+                      <td>{mapAddress}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="ml-3 mt-2">
+                  バスケットコートまで
+                  <span className="font-bold text-md text-red-500 ml-1 mr-1">
+                    {distance}km
+                  </span>
+                  あります。
+                </div>
+              </div>
+              <button
+                onClick={() => handleSwitch()}
+                className={`${
+                  isUsing ? "bg-green-500" : "bg-gray-500"
+                } hover:bg-green-700 text-white font-bold w-20 h-10 py-2 px-3 rounded ml-auto mr-3 whitespace-nowrap my-auto`}
+              >
+                {isUsing ? "使用中" : "未使用"}
+              </button>
+            </div>
           </div>
 
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            zoom={10}
-            onLoad={onLoad}
-          >
-            <MarkerF visible={true} position={userPos} icon={iconPath.src} />
-            <InfoWindow
-              position={userPos}
-              options={{ pixelOffset: new google.maps.Size(0, -42.5) }}
+          <div className="flex items-center justify-center mt-2">
+            <GoogleMap
+              mapContainerStyle={containerStyle}
+              zoom={10}
+              onLoad={onLoad}
             >
-              <div>
-                <h1 className="text-md font-bold">I&apos;m here!</h1>
-              </div>
-            </InfoWindow>
-            <MarkerF visible={true} position={courtPos} />
-            <InfoWindow
-              position={courtPos}
-              options={{ pixelOffset: new google.maps.Size(0, -37.5) }}
-            >
-              <div>
-                <h1 className="text-md font-bold text-red-500">
-                  The Court is here!
-                </h1>
-              </div>
-            </InfoWindow>
-          </GoogleMap>
-          <div>2点間の距離:{distance}km</div>
-          <button type="button" onClick={() => switchHref()}>
-            一覧に戻る
-          </button>
+              <MarkerF visible={true} position={userPos} icon={iconPath.src} />
+              <InfoWindow
+                position={userPos}
+                options={{ pixelOffset: new google.maps.Size(0, -42.5) }}
+              >
+                <div>
+                  <h1 className="text-md font-bold">I&apos;m here!</h1>
+                </div>
+              </InfoWindow>
+              <MarkerF visible={true} position={courtPos} />
+              <InfoWindow
+                position={courtPos}
+                options={{ pixelOffset: new google.maps.Size(0, -37.5) }}
+              >
+                <div>
+                  <h1 className="text-md font-bold text-red-500">
+                    The Court is here!
+                  </h1>
+                </div>
+              </InfoWindow>
+            </GoogleMap>
+          </div>
         </div>
       ) : (
         <div className="fixed h-full w-full bg-white">
