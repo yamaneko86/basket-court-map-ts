@@ -168,31 +168,23 @@ const ViewMap = () => {
               {mapName}
             </div>
             <div className="flex">
-              <div className="flex flex-col">
-                <table className="ml-3 mt-1">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <Image
-                          src={"/images/AddressIcon.svg"}
-                          alt="BasketBall_icon"
-                          width={20}
-                          height={20}
-                          className="mr-4"
-                        />
-                      </td>
-                      <td>{mapAddress}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="ml-3 mt-2">
-                  コートまで
-                  <span className="font-bold text-md text-red-500 ml-1 mr-1">
-                    {distance}km
-                  </span>
-                  あります。
-                </div>
-              </div>
+              <table className="ml-3 mt-1">
+                <tbody>
+                  <tr>
+                    <td>
+                      <Image
+                        src={"/images/AddressIcon.svg"}
+                        alt="BasketBall_icon"
+                        width={20}
+                        height={20}
+                        className="mr-4"
+                      />
+                    </td>
+                    <td>{mapAddress}</td>
+                  </tr>
+                </tbody>
+              </table>
+
               <button
                 onClick={() => handleSwitch()}
                 className={`${
@@ -201,6 +193,14 @@ const ViewMap = () => {
               >
                 {isUsing ? "使用中" : "未使用"}
               </button>
+            </div>
+
+            <div className="ml-3 mt-3">
+              コートまで
+              <span className="font-bold text-md text-red-500 ml-1 mr-1">
+                {distance}km
+              </span>
+              あります。
             </div>
 
             <div className="flex items-center justify-center mt-2">
