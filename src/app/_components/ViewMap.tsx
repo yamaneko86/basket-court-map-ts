@@ -13,11 +13,6 @@ import iconPath from "../../../public/images/CurrentLocation.png";
 import Link from "next/link";
 import Image from "next/image";
 
-const containerStyle = {
-  width: "95%",
-  height: "60vh",
-};
-
 let distance: number;
 
 const ViewMap = () => {
@@ -151,26 +146,24 @@ const ViewMap = () => {
 
   // TODO 1ユーザーにつき1回の使用中・未使用の切り替え機能を作成
 
-  // TODO UIをテーブルレイアウトに作り替える
-
   return (
     <>
       {isLoaded ? (
-        <div className="overflow-auto">
-          <div>
-            <div className="bg-orange-100">
-              <Link href={"/"} className="text-sm pl-2 pr-2 hover:text-red-500">
-                トップ
-              </Link>
-              {">"}
-              <button
-                type="button"
-                className="text-sm pl-2 pr-2 hover:text-red-500"
-                onClick={() => switchHref()}
-              >
-                コート一覧
-              </button>
-            </div>
+        <>
+          <div className="bg-orange-100">
+            <Link href={"/"} className="text-sm pl-2 pr-2 hover:text-red-500">
+              トップ
+            </Link>
+            {">"}
+            <button
+              type="button"
+              className="text-sm pl-2 pr-2 hover:text-red-500"
+              onClick={() => switchHref()}
+            >
+              コート一覧
+            </button>
+          </div>
+          <div className="overflow-auto">
             <div className="text-xl font-bold border-l-8 border-t-0 border-r-0 border-b-0 border-l-red-500 pl-2 ml-2 mt-2 mb-1">
               {mapName}
             </div>
@@ -209,37 +202,41 @@ const ViewMap = () => {
                 {isUsing ? "使用中" : "未使用"}
               </button>
             </div>
-          </div>
 
-          <div className="flex items-center justify-center mt-2">
-            <GoogleMap
-              mapContainerStyle={containerStyle}
-              zoom={10}
-              onLoad={onLoad}
-            >
-              <MarkerF visible={true} position={userPos} icon={iconPath.src} />
-              <InfoWindow
-                position={userPos}
-                options={{ pixelOffset: new google.maps.Size(0, -42.5) }}
+            <div className="flex items-center justify-center mt-2">
+              <GoogleMap
+                mapContainerStyle={{ width: "95%", height: "60vh" }}
+                zoom={10}
+                onLoad={onLoad}
               >
-                <div>
-                  <h1 className="text-md font-bold">I&apos;m here!</h1>
-                </div>
-              </InfoWindow>
-              <MarkerF visible={true} position={courtPos} />
-              <InfoWindow
-                position={courtPos}
-                options={{ pixelOffset: new google.maps.Size(0, -37.5) }}
-              >
-                <div>
-                  <h1 className="text-md font-bold text-red-500">
-                    The Court is here!
-                  </h1>
-                </div>
-              </InfoWindow>
-            </GoogleMap>
+                <MarkerF
+                  visible={true}
+                  position={userPos}
+                  icon={iconPath.src}
+                />
+                <InfoWindow
+                  position={userPos}
+                  options={{ pixelOffset: new google.maps.Size(0, -42.5) }}
+                >
+                  <div>
+                    <h1 className="text-md font-bold">I&apos;m here!</h1>
+                  </div>
+                </InfoWindow>
+                <MarkerF visible={true} position={courtPos} />
+                <InfoWindow
+                  position={courtPos}
+                  options={{ pixelOffset: new google.maps.Size(0, -37.5) }}
+                >
+                  <div>
+                    <h1 className="text-md font-bold text-red-500">
+                      The Court is here!
+                    </h1>
+                  </div>
+                </InfoWindow>
+              </GoogleMap>
+            </div>
           </div>
-        </div>
+        </>
       ) : (
         <div className="fixed h-full w-full bg-white">
           <div className="flex items-center justify-center h-full">
