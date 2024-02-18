@@ -14,7 +14,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const containerStyle = {
-  width: "98%",
+  width: "95%",
   height: "60vh",
 };
 
@@ -193,7 +193,7 @@ const ViewMap = () => {
                   </tbody>
                 </table>
                 <div className="ml-3 mt-2">
-                  バスケットコートまで
+                  コートまで
                   <span className="font-bold text-md text-red-500 ml-1 mr-1">
                     {distance}km
                   </span>
