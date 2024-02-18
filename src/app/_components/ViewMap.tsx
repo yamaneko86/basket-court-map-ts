@@ -205,7 +205,10 @@ const ViewMap = () => {
 
             <div className="flex items-center justify-center mt-2">
               <GoogleMap
-                mapContainerStyle={{ width: "95%", height: "60vh" }}
+                mapContainerStyle={{
+                  width: "95%",
+                  height: window.innerWidth <= 780 ? "50vh" : "60vh",
+                }}
                 zoom={10}
                 onLoad={onLoad}
               >
