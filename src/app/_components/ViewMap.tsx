@@ -189,7 +189,7 @@ const ViewMap = () => {
                 onClick={() => handleSwitch()}
                 className={`${
                   isUsing ? "bg-green-500" : "bg-gray-500"
-                } hover:bg-green-700 text-white font-bold w-20 h-10 py-2 px-3 rounded ml-auto mr-3 whitespace-nowrap my-auto`}
+                } text-white font-bold w-20 h-10 py-2 px-3 rounded ml-auto mr-3 whitespace-nowrap my-auto`}
               >
                 {isUsing ? "使用中" : "未使用"}
               </button>

@@ -26,7 +26,7 @@ const CourtsList = (props: PrefectureCodes) => {
         {">"}
       </div>
       <div className="overflow-auto">
-        <table className="w-full divide-y divide-gray-200">
+        <table className="w-full divide-y divide-gray-300">
           <thead className="bg-gray-50">
             <tr>
               <th
@@ -55,11 +55,11 @@ const CourtsList = (props: PrefectureCodes) => {
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white divide-y divide-gray-300">
             {courts.map((court: CourtInfo) => (
               <tr
                 key={court.map_id}
-                className={court.isUsing ? "bg-red-100" : "bg-green-100"}
+                className={court.isUsing ? "bg-green-200" : "bg-gray-100"}
               >
                 <td className="px-6 py-4 whitespace-nowrap">
                   {court.map_name}
