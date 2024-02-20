@@ -19,8 +19,8 @@ const CourtsList = (props: PrefectureCodes) => {
 
   return (
     <>
-      <div className="bg-orange-100">
-        <Link href={"/"} className="text-sm pl-2 pr-2 hover:text-red-500">
+      <div className="bg-orange-100 h-8 flex items-center">
+        <Link href={"/"} className="text-md px-2 hover:text-red-500">
           トップ
         </Link>
         {">"}
