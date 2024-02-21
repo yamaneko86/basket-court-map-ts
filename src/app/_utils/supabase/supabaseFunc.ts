@@ -1,5 +1,26 @@
 import { supabase } from "./supabase";
 
+// 全コートの都道府県コードを取得
+export const getPrefCode = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("BasketCourtMaps")
+      .select("prefecture_code");
+
+    if (error) {
+      throw error;
+    }
+
+    // 都道府県コードの配列を返す
+    return data;
+
+    // 以下、エラー時の処理
+  } catch (error) {
+    console.error("Error fetching data!");
+    return null;
+  }
+};
+
 // 都道府県をグループ化して各情報を取得
 export const getCourtInfoByPref = async (
   lower_limit: number,
@@ -92,24 +113,24 @@ export const switchIsUsing = async (map_id: string, isUsing: boolean) => {
 };
 
 // IDでユーザーネームを検索する処理
-export const getUserNameById = async (id: string) => {
-  try {
-    const { data, error } = await supabase
-      .from("Users")
-      .select("user_name")
-      .eq("id", id);
+// export const getUserNameById = async (id: string) => {
+//   try {
+//     const { data, error } = await supabase
+//       .from("Users")
+//       .select("user_name")
+//       .eq("id", id);
 
-    if (error) {
-      throw error;
-    }
+//     if (error) {
+//       throw error;
+//     }
 
-    // ユーザーネームを返す
-    return data[0].user_name;
+//     // ユーザーネームを返す
+//     return data[0].user_name;
 
-    // 以下、エラー時の処理
-  } catch (error) {
-    console.error("Error fetching data!");
-  }
-};
+//     // 以下、エラー時の処理
+//   } catch (error) {
+//     console.error("Error fetching data!");
+//   }
+// };
 
 // TODO 1ユーザーにつき1回の使用中・未使用の切り替え機能を作成
