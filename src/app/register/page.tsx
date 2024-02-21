@@ -31,6 +31,7 @@ export default function SignUp() {
     }
   };
 
+  // TODO オシャレする
   return (
     <div className="flex h-screen items-center justify-center">
       <form className="space-y-4" onSubmit={onSubmit}>
