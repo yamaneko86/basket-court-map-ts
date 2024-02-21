@@ -1,76 +1,71 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { getCountOfCourts } from "@/_utils/supabase/supabaseFunc";
+import { getPrefCode } from "@/_utils/supabase/supabaseFunc";
 import Link from "next/link";
 
 const CountCourts = () => {
-  const [countHokkaido, setCountHokkaido] = useState<any>(-1); //北海道のコート数
-  const [countTohoku, setCountTohoku] = useState<any>(-1); //東北地方のコート数
-  const [countKanto, setCountKanto] = useState<any>(-1); //関東地方のコート数
-  const [countChubu, setCountChubu] = useState<any>(-1); //中部地方のコート数
-  const [countKinki, setCountKinki] = useState<any>(-1); //近畿地方のコート数
-  const [countChugoku, setCountChugoku] = useState<any>(-1); //中国地方のコート数
-  const [countShikoku, setCountShikoku] = useState<any>(-1); //四国地方のコート数
-  const [countKyushu, setCountKyushu] = useState<any>(-1); //九州地方のコート数
+  // 各地方のコート件数を管理
+  const [counts, setCounts] = useState({
+    countHokkaido: 0,
+    countTohoku: 0,
+    countKanto: 0,
+    countChubu: 0,
+    countKinki: 0,
+    countChugoku: 0,
+    countShikoku: 0,
+    countKyushu: 0,
+  });
 
   useEffect(() => {
-    //北海道のコート数を取得
-    const getHokkaidoCourts = async () => {
-      const count = await getCountOfCourts(1, 1);
-      setCountHokkaido(count);
-    };
+    // コート件数の取得
+    const getNumOfCourts = async () => {
+      const prefArray = await getPrefCode();
 
-    //東北地方のコート数を取得
-    const getTohokuCourts = async () => {
-      const count = await getCountOfCourts(2, 7);
-      setCountTohoku(count);
-    };
+      let cntHokkaido: number = 0;
+      let cntTohoku: number = 0;
+      let cntKanto: number = 0;
+      let cntChubu: number = 0;
+      let cntKinki: number = 0;
+      let cntChugoku: number = 0;
+      let cntShikoku: number = 0;
+      let cntKyushu: number = 0;
 
-    //関東地方のコート数を取得
-    const getKantoCourts = async () => {
-      const count = await getCountOfCourts(8, 14);
-      setCountKanto(count);
-    };
+      prefArray?.forEach((data) => {
+        if (data.prefecture_code == 1) {
+          cntHokkaido += 1;
+        } else if (data.prefecture_code >= 2 && data.prefecture_code <= 7) {
+          cntTohoku += 1;
+        } else if (data.prefecture_code >= 8 && data.prefecture_code <= 14) {
+          cntKanto += 1;
+        } else if (data.prefecture_code >= 15 && data.prefecture_code <= 23) {
+          cntChubu += 1;
+        } else if (data.prefecture_code >= 24 && data.prefecture_code <= 30) {
+          cntKinki += 1;
+        } else if (data.prefecture_code >= 31 && data.prefecture_code <= 35) {
+          cntChugoku += 1;
+        } else if (data.prefecture_code >= 36 && data.prefecture_code <= 39) {
+          cntShikoku += 1;
+        } else if (data.prefecture_code >= 40 && data.prefecture_code <= 47) {
+          cntKyushu += 1;
+        } else {
+          return null;
+        }
+      });
 
-    //中部地方のコート数を取得
-    const getChubuCourts = async () => {
-      const count = await getCountOfCourts(15, 23);
-      setCountChubu(count);
-    };
-
-    //近畿地方のコート数を取得
-    const getKinkiCourts = async () => {
-      const count = await getCountOfCourts(24, 30);
-      setCountKinki(count);
-    };
-
-    //中国地方のコート数を取得
-    const getChugokuCourts = async () => {
-      const count = await getCountOfCourts(31, 35);
-      setCountChugoku(count);
-    };
-
-    //四国地方のコート数を取得
-    const getShikokuCourts = async () => {
-      const count = await getCountOfCourts(36, 39);
-      setCountShikoku(count);
-    };
-
-    //九州地方のコート数を取得
-    const getKyushuCourts = async () => {
-      const count = await getCountOfCourts(40, 47);
-      setCountKyushu(count);
+      setCounts({
+        countHokkaido: cntHokkaido,
+        countTohoku: cntTohoku,
+        countKanto: cntKanto,
+        countChubu: cntChubu,
+        countKinki: cntKinki,
+        countChugoku: cntChugoku,
+        countShikoku: cntShikoku,
+        countKyushu: cntKyushu,
+      });
     };
 
     // 処理呼び出し
-    getHokkaidoCourts();
-    getTohokuCourts();
-    getKantoCourts();
-    getChubuCourts();
-    getKinkiCourts();
-    getChugokuCourts();
-    getShikokuCourts();
-    getKyushuCourts();
+    getNumOfCourts();
   }, []);
 
   return (
@@ -80,56 +75,56 @@ const CountCourts = () => {
           href={"/hokkaido"}
           className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
-          北海道：{countHokkaido}
+          北海道：{counts.countHokkaido}
         </Link>
 
         <Link
           href={"/tohoku"}
           className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
-          東北地方：{countTohoku}
+          東北地方：{counts.countTohoku}
         </Link>
 
         <Link
           href={"/kanto"}
           className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
-          関東地方：{countKanto}
+          関東地方：{counts.countKanto}
         </Link>
 
         <Link
           href={"/chubu"}
           className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
-          中部地方：{countChubu}
+          中部地方：{counts.countChubu}
         </Link>
 
         <Link
           href={"/kinki"}
           className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
-          近畿地方：{countKinki}
+          近畿地方：{counts.countKinki}
         </Link>
 
         <Link
           href={"/chugoku"}
           className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
-          中国地方：{countChugoku}
+          中国地方：{counts.countChugoku}
         </Link>
 
         <Link
           href={"/shikoku"}
           className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
-          四国地方：{countShikoku}
+          四国地方：{counts.countShikoku}
         </Link>
 
         <Link
           href={"/kyushu"}
           className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
-          九州地方：{countKyushu}
+          九州地方：{counts.countKyushu}
         </Link>
       </div>
     </>
