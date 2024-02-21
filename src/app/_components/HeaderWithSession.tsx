@@ -2,7 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Header from "./Header";
 
-const SupabaseListener = async () => {
+const HeaderWithSession = async () => {
   const supabase = createServerComponentClient({ cookies });
 
   const {
@@ -12,4 +12,4 @@ const SupabaseListener = async () => {
   return <Header session={session} />;
 };
 
-export default SupabaseListener;
+export default HeaderWithSession;
