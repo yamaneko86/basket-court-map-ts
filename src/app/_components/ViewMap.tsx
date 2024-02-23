@@ -79,18 +79,20 @@ const ViewMap = () => {
 
   // ユーザの現在の緯度経度を取得
   const getUserLatLng = () => {
-    navigator.geolocation.getCurrentPosition(
-      // 取得成功処理
-      (position: GeolocationPosition) => {
-        const curLat: number = position.coords.latitude;
-        const curLng: number = position.coords.longitude;
-        setUserPos({ lat: curLat, lng: curLng });
-      },
-      // 取得失敗処理
-      (error: any) => {
-        alert("位置情報を取得できませんでした。");
-      }
-    );
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        // 取得成功処理
+        (position: GeolocationPosition) => {
+          const curLat: number = position.coords.latitude;
+          const curLng: number = position.coords.longitude;
+          setUserPos({ lat: curLat, lng: curLng });
+        },
+        // 取得失敗処理
+        (error: any) => {
+          alert("位置情報を取得できませんでした。");
+        }
+      );
+    }
   };
 
   // コートの都道府県コード・名前・住所・緯度経度・使用状況を取得
