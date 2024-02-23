@@ -5,7 +5,7 @@ import {
   MarkerF,
   useJsApiLoader,
 } from "@react-google-maps/api";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { getCourtInfo, switchIsUsing } from "@/_utils/supabase/supabaseFunc";
 import { calcCenter, calcSwNe, distanceCalc } from "@/_utils/calcFunc";
 import { useParams, useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ import iconPath from "../../../public/images/CurrentLocation.png";
 import Link from "next/link";
 import Image from "next/image";
 
+// 現在地と目的地の距離
 let distance: number;
 
 const ViewMap = () => {
@@ -21,25 +22,29 @@ const ViewMap = () => {
   const [mapName, setMapName] = useState<string>("");
   const [mapAddress, setMapAddress] = useState<string>("");
   const [isUsing, setIsUsing] = useState<boolean>(false);
+  const [map, setMap] = useState<google.maps.Map>();
+
+  // map_idをURLから取得("map_id"は動的ルートパス名)
+  const map_id_path = useParams().map_id.toString();
 
   // 現在地の緯度経度を管理
-  let [userPos, setUserPos] = useState<{ lat: number; lng: number }>({
+  const [userPos, setUserPos] = useState<{ lat: number; lng: number }>({
     lat: 0,
     lng: 0,
   });
 
   // バスケットコートの緯度経度を管理
-  let [courtPos, setCourtPos] = useState<{ lat: number; lng: number }>({
+  const [courtPos, setCourtPos] = useState<{ lat: number; lng: number }>({
     lat: 0,
     lng: 0,
   });
 
-  const [map, setMap] = useState<google.maps.Map>();
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
+  });
 
   const onLoad = useCallback((map: google.maps.Map) => setMap(map), []);
-
-  // map_idをURLから取得("map_id"は動的ルートパス名)
-  const map_id_path = useParams().map_id.toString();
 
   const handleSwitch = async () => {
     await switchIsUsing(map_id_path, isUsing);
@@ -72,77 +77,57 @@ const ViewMap = () => {
     }
   };
 
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
-  });
-
-  useEffect(() => {
-    // ユーザの現在の緯度経度を取得
-    const getUserLatLng = () => {
-      navigator.geolocation.getCurrentPosition(
-        // 取得成功処理
-        (position: GeolocationPosition) => {
-          const curLat: number = position.coords.latitude;
-          const curLng: number = position.coords.longitude;
-          setUserPos({ lat: curLat, lng: curLng });
-        },
-        // 取得失敗処理
-        (error: any) => {
-          alert("位置情報を取得できませんでした。");
-        }
-      );
-    };
-
-    // コートの都道府県コード・名前・住所・緯度経度・使用状況を取得
-    const getCourtInfoDetail = async () => {
-      const data = await getCourtInfo(map_id_path);
-      if (data) {
-        setPrefCode(data[0].prefecture_code);
-        setMapName(data[0].map_name);
-        setMapAddress(data[0].map_address);
-        setCourtPos({ lat: data[0].latitude, lng: data[0].longitude });
-        setIsUsing(data[0].isUsing);
+  // ユーザの現在の緯度経度を取得
+  const getUserLatLng = () => {
+    navigator.geolocation.getCurrentPosition(
+      // 取得成功処理
+      (position: GeolocationPosition) => {
+        const curLat: number = position.coords.latitude;
+        const curLng: number = position.coords.longitude;
+        setUserPos({ lat: curLat, lng: curLng });
+      },
+      // 取得失敗処理
+      (error: any) => {
+        alert("位置情報を取得できませんでした。");
       }
-    };
+    );
+  };
 
-    // 処理呼び出し
-    getCourtInfoDetail();
-    getUserLatLng();
-    distance = distanceCalc(
+  // コートの都道府県コード・名前・住所・緯度経度・使用状況を取得
+  const getCourtInfoDetail = async () => {
+    const data = await getCourtInfo(map_id_path);
+    if (data) {
+      setPrefCode(data[0].prefecture_code);
+      setMapName(data[0].map_name);
+      setMapAddress(data[0].map_address);
+      setCourtPos({ lat: data[0].latitude, lng: data[0].longitude });
+      setIsUsing(data[0].isUsing);
+    }
+  };
+
+  // 処理呼び出し
+  getCourtInfoDetail();
+  getUserLatLng();
+  distance = distanceCalc(userPos.lat, userPos.lng, courtPos.lat, courtPos.lng);
+
+  // マーカーが全てマップ内に表示されるようにする
+  if (map) {
+    const center = calcCenter(
+      userPos.lat,
+      userPos.lng,
+      courtPos.lat,
+      courtPos.lng
+    );
+    const bounds = calcSwNe(
       userPos.lat,
       userPos.lng,
       courtPos.lat,
       courtPos.lng
     );
 
-    // マーカーが全てマップ内に表示されるようにする
-    if (map) {
-      const center = calcCenter(
-        userPos.lat,
-        userPos.lng,
-        courtPos.lat,
-        courtPos.lng
-      );
-      const bounds = calcSwNe(
-        userPos.lat,
-        userPos.lng,
-        courtPos.lat,
-        courtPos.lng
-      );
-
-      map.setCenter(center);
-      map.fitBounds(bounds);
-    }
-  }, [
-    map_id_path,
-    isUsing,
-    courtPos.lat,
-    courtPos.lng,
-    userPos.lat,
-    userPos.lng,
-    map,
-  ]);
+    map.setCenter(center);
+    map.fitBounds(bounds);
+  }
 
   // TODO 1ユーザーにつき1回の使用中・未使用の切り替え機能を作成
 

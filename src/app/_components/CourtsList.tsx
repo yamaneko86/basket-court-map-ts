@@ -1,21 +1,19 @@
 "use client";
 import { getCourtInfoByPref } from "@/_utils/supabase/supabaseFunc";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const CourtsList = (props: PrefectureCodes) => {
   const { lower_limit, upper_limit } = props;
   const [courts, setCourts] = useState<any>([]);
 
-  useEffect(() => {
-    const getCourts = async () => {
-      const courtsInfo = await getCourtInfoByPref(lower_limit, upper_limit);
-      setCourts(courtsInfo);
-    };
+  const getCourts = async () => {
+    const courtsInfo = await getCourtInfoByPref(lower_limit, upper_limit);
+    setCourts(courtsInfo);
+  };
 
-    // 処理呼び出し
-    getCourts();
-  }, [lower_limit, upper_limit]);
+  // 処理呼び出し
+  getCourts();
 
   return (
     <>

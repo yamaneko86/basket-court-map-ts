@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { getPrefCode } from "@/_utils/supabase/supabaseFunc";
 import Link from "next/link";
 
@@ -16,57 +16,55 @@ const CountCourts = () => {
     countKyushu: 0,
   });
 
-  useEffect(() => {
-    // コート件数の取得
-    const getNumOfCourts = async () => {
-      const prefArray = await getPrefCode();
+  // コート件数の取得
+  const getNumOfCourts = async () => {
+    const prefArray = await getPrefCode();
 
-      let cntHokkaido: number = 0;
-      let cntTohoku: number = 0;
-      let cntKanto: number = 0;
-      let cntChubu: number = 0;
-      let cntKinki: number = 0;
-      let cntChugoku: number = 0;
-      let cntShikoku: number = 0;
-      let cntKyushu: number = 0;
+    let cntHokkaido: number = 0;
+    let cntTohoku: number = 0;
+    let cntKanto: number = 0;
+    let cntChubu: number = 0;
+    let cntKinki: number = 0;
+    let cntChugoku: number = 0;
+    let cntShikoku: number = 0;
+    let cntKyushu: number = 0;
 
-      prefArray?.forEach((data) => {
-        if (data.prefecture_code == 1) {
-          cntHokkaido += 1;
-        } else if (data.prefecture_code >= 2 && data.prefecture_code <= 7) {
-          cntTohoku += 1;
-        } else if (data.prefecture_code >= 8 && data.prefecture_code <= 14) {
-          cntKanto += 1;
-        } else if (data.prefecture_code >= 15 && data.prefecture_code <= 23) {
-          cntChubu += 1;
-        } else if (data.prefecture_code >= 24 && data.prefecture_code <= 30) {
-          cntKinki += 1;
-        } else if (data.prefecture_code >= 31 && data.prefecture_code <= 35) {
-          cntChugoku += 1;
-        } else if (data.prefecture_code >= 36 && data.prefecture_code <= 39) {
-          cntShikoku += 1;
-        } else if (data.prefecture_code >= 40 && data.prefecture_code <= 47) {
-          cntKyushu += 1;
-        } else {
-          return null;
-        }
-      });
+    prefArray?.forEach((data) => {
+      if (data.prefecture_code == 1) {
+        cntHokkaido += 1;
+      } else if (data.prefecture_code >= 2 && data.prefecture_code <= 7) {
+        cntTohoku += 1;
+      } else if (data.prefecture_code >= 8 && data.prefecture_code <= 14) {
+        cntKanto += 1;
+      } else if (data.prefecture_code >= 15 && data.prefecture_code <= 23) {
+        cntChubu += 1;
+      } else if (data.prefecture_code >= 24 && data.prefecture_code <= 30) {
+        cntKinki += 1;
+      } else if (data.prefecture_code >= 31 && data.prefecture_code <= 35) {
+        cntChugoku += 1;
+      } else if (data.prefecture_code >= 36 && data.prefecture_code <= 39) {
+        cntShikoku += 1;
+      } else if (data.prefecture_code >= 40 && data.prefecture_code <= 47) {
+        cntKyushu += 1;
+      } else {
+        return null;
+      }
+    });
 
-      setCounts({
-        countHokkaido: cntHokkaido,
-        countTohoku: cntTohoku,
-        countKanto: cntKanto,
-        countChubu: cntChubu,
-        countKinki: cntKinki,
-        countChugoku: cntChugoku,
-        countShikoku: cntShikoku,
-        countKyushu: cntKyushu,
-      });
-    };
+    setCounts({
+      countHokkaido: cntHokkaido,
+      countTohoku: cntTohoku,
+      countKanto: cntKanto,
+      countChubu: cntChubu,
+      countKinki: cntKinki,
+      countChugoku: cntChugoku,
+      countShikoku: cntShikoku,
+      countKyushu: cntKyushu,
+    });
+  };
 
-    // 処理呼び出し
-    getNumOfCourts();
-  }, []);
+  // 処理呼び出し
+  getNumOfCourts();
 
   return (
     <>

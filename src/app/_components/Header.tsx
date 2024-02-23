@@ -4,11 +4,9 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { type Session } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-// import { getUserNameById } from "@/_utils/supabase/supabaseFunc";
 
 const Header = ({ session }: { session: Session | null }) => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-  // const [userName, setUserName] = useState<string>("名無し");
 
   const menuFunc = () => {
     setOpenMenu(!openMenu);
@@ -18,21 +16,6 @@ const Header = ({ session }: { session: Session | null }) => {
   if (session === null) {
     router.push("/login");
   }
-
-  // ユーザーネームを取得
-  // useEffect(() => {
-  //   const getUserName = async () => {
-  //     if (session) {
-  //       const logged_in_user_name: string = await getUserNameById(
-  //         session?.user?.id
-  //       );
-  //       setUserName(logged_in_user_name);
-  //     }
-  //   };
-
-  // 処理呼び出し
-  //   getUserName();
-  // }, [session]);
 
   return (
     <>
