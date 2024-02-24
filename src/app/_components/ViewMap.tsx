@@ -114,6 +114,20 @@ const ViewMap = () => {
 
   // マーカーが全てマップ内に表示されるようにする
   if (map) {
+    // 以下、beta版？のため保留中
+    // const userIcon = document.createElement("img");
+    // userIcon.src = "../../../public/images/CurrentLocation.png";
+    // const userMarker = new google.maps.marker.AdvancedMarkerElement({
+    //   map: map,
+    //   position: userPos,
+    // content: userIcon,
+    // });
+
+    // const courtMarker = new google.maps.marker.AdvancedMarkerElement({
+    //   map: map,
+    //   position: courtPos,
+    // });
+
     const center = calcCenter(
       userPos.lat,
       userPos.lng,
