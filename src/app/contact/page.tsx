@@ -1,10 +1,6 @@
-import Footer from "@/_components/Footer";
-import HeaderWithSession from "@/_components/HeaderWithSession";
-
 export default function Contact() {
   return (
-    <main className="flex flex-col h-screen">
-      <HeaderWithSession />
+    <main>
       <h1>これはcontactページです</h1>
       <div>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel est quos
@@ -12,7 +8,6 @@ export default function Contact() {
         numquam reprehenderit maiores tempora nobis nemo. Numquam minima ea
         explicabo veniam.
       </div>
-      <Footer />
     </main>
   );
 }
