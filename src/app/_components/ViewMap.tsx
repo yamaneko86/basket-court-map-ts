@@ -242,11 +242,9 @@ const ViewMap = () => {
           </div>
         </>
       ) : (
-        <div className="fixed h-full w-full bg-white">
-          <div className="flex items-center justify-center h-full">
-            <div className="text-5xl font-bold text-gray-800 animate-bounce">
-              Loading...
-            </div>
+        <div className="h-[calc(100%-96px)] w-full flex items-center justify-center bg-white">
+          <div className="text-5xl font-bold text-gray-800 animate-bounce">
+            Loading...
           </div>
         </div>
       )}
