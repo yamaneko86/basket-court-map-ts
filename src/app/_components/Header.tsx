@@ -34,13 +34,19 @@ const Header = ({ session }: { session: Session | null }) => {
             <>
               <ul className="sm:hidden flex flex-col animate-fade-in absolute inset-20 z-10 justify-evenly items-center bg-amber-500 border-2 rounded-lg text-3xl font-bold">
                 <li className="hover:text-white">
-                  <Link href={"/"}>Home</Link>
+                  <Link href={"/"} onClick={() => menuFunc()}>
+                    Home
+                  </Link>
                 </li>
                 <li className="hover:text-white">
-                  <Link href={"/about"}>About</Link>
+                  <Link href={"/about"} onClick={() => menuFunc()}>
+                    About
+                  </Link>
                 </li>
                 <li className="hover:text-white">
-                  <Link href={"/contact"}>Contact</Link>
+                  <Link href={"/contact"} onClick={() => menuFunc()}>
+                    Contact
+                  </Link>
                 </li>
                 <li className="hover:text-white">
                   <form action="/api/auth/logout" method="post">
