@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/images/BasketGoal_Icon.svg",
   },
+  manifest: "/pwa/manifest.json",
 };
 
 export default function RootLayout({
