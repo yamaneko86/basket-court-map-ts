@@ -33,12 +33,18 @@ export default function SignUp() {
 
   // TODO オシャレする
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex flex-col h-screen items-center">
+      <div className="text-3xl sm:text-5xl font-bold my-10 mx-5">
+        Let&apos;s find outdoor
+        <br />
+        Basketball Courts!
+      </div>
+      <span className="text-4xl sm:text-6xl animate-bounce">🏀</span>
       <form className="space-y-4" onSubmit={onSubmit}>
         <div className="flex flex-col">
           <label
             htmlFor="email"
-            className="mb-2 text-sm font-medium text-gray-900"
+            className="mb-2 text-sm font-bold text-gray-900"
           >
             メールアドレス
           </label>
@@ -56,7 +62,7 @@ export default function SignUp() {
         <div className="flex flex-col">
           <label
             htmlFor="password"
-            className="mb-2 text-sm font-medium text-gray-900"
+            className="mb-2 text-sm font-bold text-gray-900"
           >
             パスワード
           </label>
@@ -74,7 +80,7 @@ export default function SignUp() {
         <div className="flex flex-col">
           <label
             htmlFor="passwordConf"
-            className="mb-2 text-sm font-medium text-gray-900"
+            className="mb-2 text-sm font-bold text-gray-900"
           >
             パスワード（確認）
           </label>
