@@ -244,7 +244,7 @@ const ViewMap = () => {
       ) : (
         <div className="h-[calc(100%-96px)] w-full flex items-center justify-center bg-white">
           <div className="text-5xl font-bold text-gray-800 animate-bounce">
-            Loading...
+            Loading...🏀
           </div>
         </div>
       )}
