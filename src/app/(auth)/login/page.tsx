@@ -4,13 +4,13 @@ export default function SignIn() {
   // TODO オシャレする
   return (
     <div className="flex flex-col h-screen items-center">
-      <div className="flex flex-row">
-        <div className="text-3xl sm:text-5xl font-bold my-10 ml-5 mr-1">
+      <div className="flex flex-row my-10">
+        <div className="text-3xl sm:text-5xl font-bold mr-1">
           Let&apos;s find outdoor
           <br />
           Basketball Courts!
         </div>
-        <div className="text-4xl sm:text-6xl pt-20 animate-bounce">🏀</div>
+        <div className="text-4xl sm:text-6xl pt-7 animate-bounce">🏀</div>
       </div>
       <form action="/api/auth/login" method="post" className="space-y-4">
         <div className="flex flex-col">
