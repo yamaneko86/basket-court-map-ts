@@ -34,7 +34,7 @@ export default function SignUp() {
   // TODO オシャレする
   return (
     <div className="flex flex-col h-screen items-center">
-      <div className="flex flex-row my-10">
+      <div className="flex flex-row mt-20 mb-10">
         <div className="text-3xl sm:text-5xl font-bold mr-1">
           Let&apos;s find outdoor
           <br />
