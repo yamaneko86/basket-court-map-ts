@@ -70,7 +70,7 @@ const CourtsList = (props: PrefectureCodes) => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button className="text-indigo-600 hover:text-indigo-900">
-                    <Link href={`detail/${court.map_id}`}>詳細</Link>
+                    <Link href={`detail/${court.map_id}`}>マップ</Link>
                   </button>
                 </td>
               </tr>
