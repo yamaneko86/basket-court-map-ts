@@ -71,56 +71,56 @@ const CountCourts = () => {
       <div className="grid sm:grid-flow-col grid-rows-4 md:grid-rows-3 gap-2 justify-center mt-auto">
         <Link
           href={"/hokkaido"}
-          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-60 h-14 text-xl bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           北海道：{counts.countHokkaido}
         </Link>
 
         <Link
           href={"/tohoku"}
-          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-60 h-14 text-xl bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           東北地方：{counts.countTohoku}
         </Link>
 
         <Link
           href={"/kanto"}
-          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-60 h-14 text-xl bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           関東地方：{counts.countKanto}
         </Link>
 
         <Link
           href={"/chubu"}
-          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-60 h-14 text-xl bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           中部地方：{counts.countChubu}
         </Link>
 
         <Link
           href={"/kinki"}
-          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-60 h-14 text-xl bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           近畿地方：{counts.countKinki}
         </Link>
 
         <Link
           href={"/chugoku"}
-          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-60 h-14 text-xl bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           中国地方：{counts.countChugoku}
         </Link>
 
         <Link
           href={"/shikoku"}
-          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-60 h-14 text-xl bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           四国地方：{counts.countShikoku}
         </Link>
 
         <Link
           href={"/kyushu"}
-          className="w-56 h-12 bg-green-300 rounded-md shadow-md flex items-center justify-center"
+          className="w-60 h-14 text-xl bg-green-300 rounded-md shadow-md flex items-center justify-center"
         >
           九州地方：{counts.countKyushu}
         </Link>
