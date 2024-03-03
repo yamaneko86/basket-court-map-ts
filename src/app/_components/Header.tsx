@@ -32,7 +32,7 @@ const Header = ({ session }: { session: Session | null }) => {
           />
           {openMenu ? (
             <>
-              <ul className="sm:hidden flex flex-col animate-fade-in absolute inset-20 z-10 justify-evenly items-center bg-amber-500 border-2 rounded-lg text-3xl font-bold">
+              <ul className="sm:hidden flex flex-col animate-fade-in absolute inset-20 z-10 justify-evenly items-center bg-amber-500 bg-opacity-90 border-2 rounded-lg text-3xl font-bold">
                 <li className="hover:text-white">
                   <Link href={"/"} onClick={() => menuFunc()}>
                     Home
