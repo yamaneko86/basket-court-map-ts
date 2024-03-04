@@ -18,9 +18,14 @@ let distance: number;
 
 const ViewMap = () => {
   // バスケットコートの都道府県コード・名前・住所・使用状況を管理
-  const [prefCode, setPrefCode] = useState<number>();
-  const [mapName, setMapName] = useState<string>("");
-  const [mapAddress, setMapAddress] = useState<string>("");
+  // const [prefCode, setPrefCode] = useState<number>();
+  // const [mapName, setMapName] = useState<string>("");
+  // const [mapAddress, setMapAddress] = useState<string>("");
+  const [courtInfo, setCourtInfo] = useState({
+    prefCode: 0,
+    mapName: "",
+    mapAddress: "",
+  });
   const [isUsing, setIsUsing] = useState<boolean>(false);
   const [map, setMap] = useState<google.maps.Map>();
 
@@ -54,22 +59,22 @@ const ViewMap = () => {
   // 都道府県コードによって戻る一覧画面を切り替える
   const router = useRouter();
   const switchHref = () => {
-    if (prefCode) {
-      if (prefCode == 1) {
+    if (courtInfo.prefCode) {
+      if (courtInfo.prefCode == 1) {
         router.push("/hokkaido");
-      } else if (prefCode >= 2 && prefCode <= 7) {
+      } else if (courtInfo.prefCode >= 2 && courtInfo.prefCode <= 7) {
         router.push("/tohoku");
-      } else if (prefCode >= 8 && prefCode <= 14) {
+      } else if (courtInfo.prefCode >= 8 && courtInfo.prefCode <= 14) {
         router.push("/kanto");
-      } else if (prefCode >= 15 && prefCode <= 23) {
+      } else if (courtInfo.prefCode >= 15 && courtInfo.prefCode <= 23) {
         router.push("/chubu");
-      } else if (prefCode >= 24 && prefCode <= 30) {
+      } else if (courtInfo.prefCode >= 24 && courtInfo.prefCode <= 30) {
         router.push("/kinki");
-      } else if (prefCode >= 31 && prefCode <= 35) {
+      } else if (courtInfo.prefCode >= 31 && courtInfo.prefCode <= 35) {
         router.push("/chugoku");
-      } else if (prefCode >= 36 && prefCode <= 39) {
+      } else if (courtInfo.prefCode >= 36 && courtInfo.prefCode <= 39) {
         router.push("/shikoku");
-      } else if (prefCode >= 40 && prefCode <= 47) {
+      } else if (courtInfo.prefCode >= 40 && courtInfo.prefCode <= 47) {
         router.push("/kyushu");
       } else {
         router.push("/");
@@ -99,9 +104,14 @@ const ViewMap = () => {
   const getCourtInfoDetail = async () => {
     const data = await getCourtInfo(map_id_path);
     if (data) {
-      setPrefCode(data[0].prefecture_code);
-      setMapName(data[0].map_name);
-      setMapAddress(data[0].map_address);
+      // setPrefCode(data[0].prefecture_code);
+      // setMapName(data[0].map_name);
+      // setMapAddress(data[0].map_address);
+      setCourtInfo({
+        prefCode: data[0].prefecture_code,
+        mapName: data[0].map_name,
+        mapAddress: data[0].map_address,
+      });
       setCourtPos({ lat: data[0].latitude, lng: data[0].longitude });
       setIsUsing(data[0].isUsing);
     }
@@ -166,7 +176,7 @@ const ViewMap = () => {
           </div>
           <div className="overflow-auto">
             <div className="text-xl font-bold border-l-8 border-t-0 border-r-0 border-b-0 border-l-red-500 pl-2 ml-2 mt-2 mb-1">
-              {mapName}
+              {courtInfo.mapName}
             </div>
             <div className="flex">
               <table className="ml-3 mt-1">
@@ -181,7 +191,7 @@ const ViewMap = () => {
                         className="mr-4"
                       />
                     </td>
-                    <td>{mapAddress}</td>
+                    <td>{courtInfo.mapAddress}</td>
                   </tr>
                 </tbody>
               </table>
