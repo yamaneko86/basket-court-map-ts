@@ -17,9 +17,6 @@ export default function SignUp() {
       const { error: signUpError } = await supabase.auth.signUp({
         email: email,
         password: password,
-        options: {
-          emailRedirectTo: `${location.origin}/api/auth/callback`,
-        },
       });
       if (signUpError) {
         throw signUpError;
@@ -27,7 +24,7 @@ export default function SignUp() {
       alert("登録が完了しました。ログインして下さい。");
       router.push("/login");
     } catch (error) {
-      alert("エラーが発生しました");
+      alert("エラーが発生しました。もう一度お試しください。");
     }
   };
 
