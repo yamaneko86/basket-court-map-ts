@@ -4,7 +4,7 @@
   "display": "fullscreen",
   "start_url": "/",
   "name": "BasketCourtMap",
-  "short_name": "BasketMap",
+  "short_name": "HoopMap",
   "description": "You can find outdoor Basket Court Maps!",
   "icons": [
     {
