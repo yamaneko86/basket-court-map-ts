@@ -19,7 +19,10 @@ export default function SignUp() {
         password: password,
         options: {
           data: {
-            username: "test",
+            // TODO サインイン画面にユーザーネームの入力領域を追加
+            // TODO ユーザーネームのuseStateを追加
+            // TODO できればユーザーネームを表示する処理を追加
+            user_name: "test",
           },
         },
       });
