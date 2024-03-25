@@ -7,15 +7,21 @@ export async function POST(request: Request) {
 	const formData = await request.formData();
 	const email = String(formData.get("email"));
 	const password = String(formData.get("password"));
+	const user_name = String(formData.get("user_name"));
 	const supabase = createRouteHandlerClient({ cookies });
 
 	try {
-		const { error: signInError } = await supabase.auth.signInWithPassword({
+		const { error: signUpError } = await supabase.auth.signUp({
 			email,
 			password,
+			options: {
+				data: {
+					user_name: user_name,
+				},
+			},
 		});
-		if (signInError) {
-			throw signInError;
+		if (signUpError) {
+			throw signUpError;
 		}
 	} catch (error) {
 		return NextResponse.redirect(`${requestUrl.origin}/failure`);
