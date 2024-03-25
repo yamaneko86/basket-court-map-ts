@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export default function SignUp() {
-	// TODO できればユーザーネームを表示する処理を追加
 	return (
 		<div className="flex flex-col h-screen items-center">
 			<div className="flex flex-row mt-16 mb-10">
