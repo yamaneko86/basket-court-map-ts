@@ -18,9 +18,6 @@ let distance: number;
 
 const ViewMap = () => {
 	// バスケットコートの都道府県コード・名前・住所・使用状況を管理
-	// const [prefCode, setPrefCode] = useState<number>();
-	// const [mapName, setMapName] = useState<string>("");
-	// const [mapAddress, setMapAddress] = useState<string>("");
 	const [courtInfo, setCourtInfo] = useState({
 		prefCode: 0,
 		mapName: "",
