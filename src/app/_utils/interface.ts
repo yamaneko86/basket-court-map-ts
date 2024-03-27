@@ -19,8 +19,3 @@ interface CourtInfo {
 	longitude: number;
 	isUsing: boolean;
 }
-
-// interface LatLng {
-//   latitude: number;
-//   longitude: number;
-// }
