@@ -1,12 +1,26 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.6.3/schema.json",
-	"organizeImports": {
-		"enabled": true
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true
-		}
-	}
+  "$schema": "https://biomejs.dev/schemas/1.6.3/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "formatter": {
+    "enabled": true,
+    "ignore": [".next", "node_modules"],
+    "formatWithErrors": false,
+    "indentStyle": "space"
+  },
+  "linter": {
+    "enabled": true,
+    "ignore": [".next", "node_modules"],
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "useHookAtTopLevel": "error"
+      },
+      "style": {
+        "noNegationElse": "error",
+        "useBlockStatements": "error"
+      }
+    }
+  }
 }
