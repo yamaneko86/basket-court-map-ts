@@ -14,7 +14,7 @@ const Header = ({ session }: { session: Session | null }) => {
 
   const router = useRouter();
   if (session === null) {
-    router.push("/login");
+    router.push("/welcome");
   }
 
   return (
