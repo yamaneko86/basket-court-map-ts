@@ -13,17 +13,17 @@ export default function SignIn() {
       </div>
       <div className="flex flex-col items-center space-y-4">
         <div className="flex flex-col text-center items-center">
-          <div className="text-2xl sm:text-4xl font-bold">
-            ！このアプリについて！
+          <div className="text-2xl sm:text-4xl font-bold mb-4">
+            このアプリについて
           </div>
           <div className="w-80">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel est
-            quos voluptas labore repellendus accusamus. Aliquid facere laborum
-            expedita numquam reprehenderit maiores tempora nobis nemo. Numquam
-            minima ea explicabo veniam. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Cum repellat aliquid ipsam voluptatem ad dolor
-            quam architecto, veritatis fugiat quia sequi? Magni, unde sunt
-            repellat natus nobis nulla corrupti ipsam!
+            屋外のバスケットコートを
+            <br />
+            検索することができます。
+            <br />
+            現在地とコートの場所を
+            <br />
+            GoogleMap上で表示します。
           </div>
         </div>
 
