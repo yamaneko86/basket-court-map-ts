@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function SignIn() {
+export default function Welcome() {
   return (
     <div className="flex flex-col h-screen items-center">
       <div className="flex flex-row mt-16 mb-10">
