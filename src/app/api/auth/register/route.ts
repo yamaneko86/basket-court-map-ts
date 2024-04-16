@@ -16,6 +16,7 @@ export async function POST(request: Request) {
       password,
       options: {
         data: {
+          // auth.usersテーブルの"raw_user_meta_data"にjson形式で追加
           user_name: user_name,
         },
       },
