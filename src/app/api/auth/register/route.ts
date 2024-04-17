@@ -25,6 +25,7 @@ export async function POST(request: Request) {
       throw signUpError;
     }
   } catch (error) {
+    // エラー発生時、専用ページに遷移する
     return NextResponse.redirect(`${requestUrl.origin}/failure`);
   }
 
