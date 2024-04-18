@@ -29,6 +29,7 @@ export async function POST(request: Request) {
     return NextResponse.redirect(`${requestUrl.origin}/failure`);
   }
 
+  //トップページに遷移する
   return NextResponse.redirect(`${requestUrl.origin}/`, {
     status: 301,
   });

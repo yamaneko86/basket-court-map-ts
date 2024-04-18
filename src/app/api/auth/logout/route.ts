@@ -8,6 +8,7 @@ export async function POST(request: Request) {
 
   await supabase.auth.signOut();
 
+  //トップページに遷移する
   return NextResponse.redirect(`${requestUrl.origin}/login`, {
     status: 301,
   });

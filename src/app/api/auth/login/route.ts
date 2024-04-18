@@ -18,9 +18,11 @@ export async function POST(request: Request) {
       throw signInError;
     }
   } catch (error) {
+    // エラー発生時、専用ページに遷移する
     return NextResponse.redirect(`${requestUrl.origin}/failure`);
   }
 
+  //トップページに遷移する
   return NextResponse.redirect(`${requestUrl.origin}/`, {
     status: 301,
   });
