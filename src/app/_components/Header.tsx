@@ -14,6 +14,7 @@ const Header = ({ session }: { session: Session | null }) => {
 
   const router = useRouter();
   if (session === null) {
+    // 未ログイン状態の場合、ウェルカムページに遷移する
     router.push("/welcome");
   }
 
