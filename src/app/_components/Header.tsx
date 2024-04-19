@@ -5,10 +5,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
+// セッション情報をHeaderで受け取る
 const Header = ({ session }: { session: Session | null }) => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const menuFunc = () => {
+    // openMenuを切り替える(true/false)
     setOpenMenu(!openMenu);
   };
 
