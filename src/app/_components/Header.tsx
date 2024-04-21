@@ -22,6 +22,7 @@ const Header = ({ session }: { session: Session | null }) => {
 
   return (
     <>
+      {/* セッションの状態で表示する画面を切り替える */}
       {session ? (
         <header className="flex items-center h-12 bg-amber-500">
           <Link href={"/"} className="text-lg font-bold pl-4 pr-1">
