@@ -1,17 +1,17 @@
-'use client';
-import { calcCenter, calcSwNe, distanceCalc } from '@/_utils/calcFunc';
-import { getCourtInfo, switchIsUsing } from '@/_utils/supabase/supabaseFunc';
+"use client";
+import { calcCenter, calcSwNe, distanceCalc } from "@/_utils/calcFunc";
+import { getCourtInfo, switchIsUsing } from "@/_utils/supabase/supabaseFunc";
 import {
   GoogleMap,
   InfoWindow,
   MarkerF,
   useJsApiLoader,
-} from '@react-google-maps/api';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useParams, useRouter } from 'next/navigation';
-import { useCallback, useState } from 'react';
-import iconPath from '../../../public/images/CurrentLocation.png';
+} from "@react-google-maps/api";
+import Image from "next/image";
+import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
+import iconPath from "../../../public/images/CurrentLocation.png";
 
 // 現在地と目的地の距離
 let distance: number;
@@ -20,14 +20,14 @@ const ViewMap = () => {
   // バスケットコートの都道府県コード・名前・住所・使用状況を管理
   const [courtInfo, setCourtInfo] = useState({
     prefCode: 0,
-    mapName: '',
-    mapAddress: '',
+    mapName: "",
+    mapAddress: "",
   });
   const [isUsing, setIsUsing] = useState<boolean>(false);
   const [map, setMap] = useState<google.maps.Map>();
 
-  // map_idをURLから取得("map_id"は動的ルートパス名)
-  const map_id_path = useParams().map_id.toString();
+  // map_idをURLから取得(右辺の"map_id"は動的ルートパス名)
+  const map_id = useParams().map_id.toString();
 
   // 現在地の緯度経度を管理
   const [userPos, setUserPos] = useState<{ lat: number; lng: number }>({
@@ -42,14 +42,14 @@ const ViewMap = () => {
   });
 
   const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
+    id: "google-map-script",
     googleMapsApiKey: String(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY),
   });
 
   const onLoad = useCallback((map: google.maps.Map) => setMap(map), []);
 
   const handleSwitch = async () => {
-    await switchIsUsing(map_id_path, isUsing);
+    await switchIsUsing(map_id, isUsing);
     setIsUsing(!isUsing);
   };
 
@@ -58,23 +58,23 @@ const ViewMap = () => {
   const switchHref = () => {
     if (courtInfo.prefCode) {
       if (courtInfo.prefCode === 1) {
-        router.push('/hokkaido');
+        router.push("/hokkaido");
       } else if (courtInfo.prefCode >= 2 && courtInfo.prefCode <= 7) {
-        router.push('/tohoku');
+        router.push("/tohoku");
       } else if (courtInfo.prefCode >= 8 && courtInfo.prefCode <= 14) {
-        router.push('/kanto');
+        router.push("/kanto");
       } else if (courtInfo.prefCode >= 15 && courtInfo.prefCode <= 23) {
-        router.push('/chubu');
+        router.push("/chubu");
       } else if (courtInfo.prefCode >= 24 && courtInfo.prefCode <= 30) {
-        router.push('/kinki');
+        router.push("/kinki");
       } else if (courtInfo.prefCode >= 31 && courtInfo.prefCode <= 35) {
-        router.push('/chugoku');
+        router.push("/chugoku");
       } else if (courtInfo.prefCode >= 36 && courtInfo.prefCode <= 39) {
-        router.push('/shikoku');
+        router.push("/shikoku");
       } else if (courtInfo.prefCode >= 40 && courtInfo.prefCode <= 47) {
-        router.push('/kyushu');
+        router.push("/kyushu");
       } else {
-        router.push('/');
+        router.push("/");
       }
     }
   };
@@ -91,7 +91,7 @@ const ViewMap = () => {
         },
         // 取得失敗処理
         (error: GeolocationPositionError) => {
-          alert('位置情報を取得できませんでした。');
+          alert("位置情報を取得できませんでした。");
         },
       );
     }
@@ -99,7 +99,7 @@ const ViewMap = () => {
 
   // コートの都道府県コード・名前・住所・緯度経度・使用状況を取得
   const getCourtInfoDetail = async () => {
-    const data = await getCourtInfo(map_id_path);
+    const data = await getCourtInfo(map_id);
     if (data) {
       // setPrefCode(data[0].prefecture_code);
       // setMapName(data[0].map_name);
@@ -159,10 +159,10 @@ const ViewMap = () => {
       {isLoaded ? (
         <>
           <div className="bg-orange-100 h-8 flex items-center">
-            <Link href={'/'} className="text-md px-2 hover:text-red-500">
+            <Link href={"/"} className="text-md px-2 hover:text-red-500">
               トップ
             </Link>
-            {'>'}
+            {">"}
             <button
               type="button"
               className="text-md px-2 hover:text-red-500"
@@ -181,7 +181,7 @@ const ViewMap = () => {
                   <tr>
                     <td>
                       <Image
-                        src={'/images/AddressIcon.svg'}
+                        src={"/images/AddressIcon.svg"}
                         alt="BasketBall_icon"
                         width={20}
                         height={20}
@@ -197,10 +197,10 @@ const ViewMap = () => {
                 type="button"
                 onClick={() => handleSwitch()}
                 className={`${
-                  isUsing ? 'bg-green-500' : 'bg-gray-500'
+                  isUsing ? "bg-green-500" : "bg-gray-500"
                 } text-white font-bold w-20 h-10 py-2 px-3 rounded ml-auto mr-3 whitespace-nowrap my-auto`}
               >
-                {isUsing ? '使用中' : '未使用'}
+                {isUsing ? "使用中" : "未使用"}
               </button>
             </div>
 
@@ -215,8 +215,8 @@ const ViewMap = () => {
             <div className="flex items-center justify-center mt-2">
               <GoogleMap
                 mapContainerStyle={{
-                  width: '95%',
-                  height: window.innerWidth <= 780 ? '50vh' : '60vh',
+                  width: "95%",
+                  height: window.innerWidth <= 780 ? "50vh" : "60vh",
                 }}
                 zoom={10}
                 onLoad={onLoad}
