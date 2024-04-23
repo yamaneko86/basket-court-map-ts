@@ -101,9 +101,6 @@ const ViewMap = () => {
   const getCourtInfoDetail = async () => {
     const data = await getCourtInfo(map_id);
     if (data) {
-      // setPrefCode(data[0].prefecture_code);
-      // setMapName(data[0].map_name);
-      // setMapAddress(data[0].map_address);
       setCourtInfo({
         prefCode: data[0].prefecture_code,
         mapName: data[0].map_name,
