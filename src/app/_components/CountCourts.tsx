@@ -29,28 +29,29 @@ const CountCourts = () => {
     let cntShikoku = 0;
     let cntKyushu = 0;
 
-    // biome-ignore lint/complexity/noForEach: <explanation>
-    prefArray?.forEach((data) => {
-      if (data.prefecture_code === 1) {
-        cntHokkaido += 1;
-      } else if (data.prefecture_code >= 2 && data.prefecture_code <= 7) {
-        cntTohoku += 1;
-      } else if (data.prefecture_code >= 8 && data.prefecture_code <= 14) {
-        cntKanto += 1;
-      } else if (data.prefecture_code >= 15 && data.prefecture_code <= 23) {
-        cntChubu += 1;
-      } else if (data.prefecture_code >= 24 && data.prefecture_code <= 30) {
-        cntKinki += 1;
-      } else if (data.prefecture_code >= 31 && data.prefecture_code <= 35) {
-        cntChugoku += 1;
-      } else if (data.prefecture_code >= 36 && data.prefecture_code <= 39) {
-        cntShikoku += 1;
-      } else if (data.prefecture_code >= 40 && data.prefecture_code <= 47) {
-        cntKyushu += 1;
-      } else {
-        return null;
+    if (prefArray) {
+      for (const data of prefArray) {
+        if (data.prefecture_code === 1) {
+          cntHokkaido += 1;
+        } else if (data.prefecture_code >= 2 && data.prefecture_code <= 7) {
+          cntTohoku += 1;
+        } else if (data.prefecture_code >= 8 && data.prefecture_code <= 14) {
+          cntKanto += 1;
+        } else if (data.prefecture_code >= 15 && data.prefecture_code <= 23) {
+          cntChubu += 1;
+        } else if (data.prefecture_code >= 24 && data.prefecture_code <= 30) {
+          cntKinki += 1;
+        } else if (data.prefecture_code >= 31 && data.prefecture_code <= 35) {
+          cntChugoku += 1;
+        } else if (data.prefecture_code >= 36 && data.prefecture_code <= 39) {
+          cntShikoku += 1;
+        } else if (data.prefecture_code >= 40 && data.prefecture_code <= 47) {
+          cntKyushu += 1;
+        } else {
+          return null;
+        }
       }
-    });
+    }
 
     setCounts({
       countHokkaido: cntHokkaido,
