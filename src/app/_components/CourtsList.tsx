@@ -3,6 +3,7 @@ import { getCourtInfoByPref } from "@/_utils/supabase/supabaseFunc";
 import Link from "next/link";
 import { useState } from "react";
 
+// 都道府県コードをpropsで受け取る
 const CourtsList = (props: PrefectureCodes) => {
   const { lower_limit, upper_limit } = props;
   const [courts, setCourts] = useState<CourtInfo[] | null>([]);
