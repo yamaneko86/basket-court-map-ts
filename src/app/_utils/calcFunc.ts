@@ -35,7 +35,7 @@ export const distanceCalc = (
   return distance;
 };
 
-// 南西と北東の計算
+// 2地点が収まる南西と北東の計算
 export const calcSwNe = (
   curLat: number, //現在地の緯度
   curLng: number, //現在地の経度
