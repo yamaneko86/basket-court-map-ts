@@ -136,6 +136,7 @@ const ViewMap = () => {
     //   position: courtPos,
     // });
 
+    // 2地点が収まる緯度経度・中心を計算
     const center = calcCenter(
       userPos.lat,
       userPos.lng,
